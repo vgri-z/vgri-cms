@@ -6,6 +6,7 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios'
 const vgriRequest = new VgriRequest({
   baseURL: BASE_URL,
   timeout: TIME_OUT,
+  // showLoading: true,
   interceptors: {
     requestInterceptor: (config: AxiosRequestConfig) => {
       console.log('请求拦截成功')

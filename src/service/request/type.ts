@@ -10,6 +10,7 @@ interface VgriRequestInterceptors {
 // 类型扩展，方便在使用时可以传入一些拦截器
 interface VgriRequestConfig extends AxiosRequestConfig {
   interceptors?: VgriRequestInterceptors
+  showLoading?: boolean
 }
 
 export { VgriRequestInterceptors, VgriRequestConfig }
