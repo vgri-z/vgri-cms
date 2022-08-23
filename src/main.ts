@@ -23,5 +23,25 @@ vgriRequest.request({
   url: '/get',
   params: {
     name: 'vgri'
+  },
+  interceptors: {
+    // 一般具体到某个网络请求，都只进行成功拦截，很少拦截失败
+    requestInterceptor: (config) => {
+      console.log('某个请求独有的请求拦截')
+      return config
+    },
+    responseInterceptor: (res) => {
+      // if (res.status === 200) {
+      //   alert('请求成功')
+      // }
+      console.log('某个请求独有的响应拦截')
+      return res
+    }
   }
 })
+// vgriRequest.request({
+//   url: '/get',
+//   params: {
+//     name: 'vgri'
+//   }
+// })
