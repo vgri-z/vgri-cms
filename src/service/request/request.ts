@@ -37,9 +37,20 @@ export class VgriRequest {
     this.instance.interceptors.response.use(
       (res) => {
         console.log('所有请求都有的响应拦截器')
-        return res
+        // 根据服务器返回的code显示请求失败信息
+        // 请求的HttpErrorCode是200，但是服务器返回的code是不正确的，
+        // 此时请求依然不成功，但是根据服务器返回的code显示请求失败信息
+        const data = res.data // 网络请求的真是数据保存在res的data中
+        if (data.code === 500) {
+          console.log('请求失败')
+        }
+        return data
       },
       (err) => {
+        // 根据不同的HttpErrorCode显示不同的请求错误的信息
+        if (err.response.status === 404) {
+          console.log('404错误')
+        }
         return err
       }
     )
