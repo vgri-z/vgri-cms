@@ -81,29 +81,54 @@ export class VgriRequest {
     )
   }
 
-  request(config: VgriRequestConfig) {
-    // 某一个请求独有的请求拦截
-    if (config.interceptors?.requestInterceptor) {
-      config = config.interceptors.requestInterceptor(config)
-    }
+  request<T>(config: VgriRequestConfig): Promise<T> {
+    // 返回一个Promise
+    return new Promise((resolve, reject) => {
+      // 某一个请求独有的请求拦截
+      if (config.interceptors?.requestInterceptor) {
+        config = config.interceptors.requestInterceptor(config)
+      }
 
-    // 某一个请求的loading是否显示
-    if (config.showLoading === false) {
-      this.showLoading = false
-    }
+      // 判断某一个请求的loading是否显示
+      if (config.showLoading === false) {
+        this.showLoading = false
+      }
 
-    return this.instance
-      .request(config)
-      .then((res) => {
-        if (config.interceptors?.responseInterceptor) {
-          res = config.interceptors.responseInterceptor(res)
-        }
-        console.log(res)
-        this.showLoading = DEFAULT_LOADING
-      })
-      .catch((err) => {
-        this.showLoading = DEFAULT_LOADING
-        return err
-      })
+      // 通过instance实例发送网络请求
+      this.instance
+        .request<any, T>(config)
+        .then((res) => {
+          if (config.interceptors?.responseInterceptor) {
+            res = config.interceptors.responseInterceptor(res)
+          }
+          // console.log(res)
+          resolve(res)
+          this.showLoading = DEFAULT_LOADING
+        })
+        .catch((err) => {
+          this.showLoading = DEFAULT_LOADING
+          reject(err)
+        })
+    })
+  }
+
+  get<T>(config: VgriRequestConfig): Promise<T> {
+    return this.request<T>({ ...config, method: 'GET' })
+  }
+
+  post<T>(config: VgriRequestConfig): Promise<T> {
+    return this.request<T>({ ...config, method: 'POST' })
+  }
+
+  delete<T>(config: VgriRequestConfig): Promise<T> {
+    return this.request<T>({ ...config, method: 'DELETE' })
+  }
+
+  patch<T>(config: VgriRequestConfig): Promise<T> {
+    return this.request<T>({ ...config, method: 'PATCH' })
+  }
+
+  put<T>(config: VgriRequestConfig): Promise<T> {
+    return this.request<T>({ ...config, method: 'PUT' })
   }
 }

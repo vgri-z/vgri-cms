@@ -40,10 +40,39 @@ app.mount('#app')
 //   }
 // })
 
-vgriRequest.request({
-  url: '/get',
-  params: {
-    name: 'vgri'
-  },
-  showLoading: true
-})
+interface DataType {
+  args: any
+  url: string
+  origin: string
+  headers: any
+}
+
+// vgriRequest
+//   .request<DataType>({
+//     url: '/get',
+//     params: {
+//       name: 'vgri'
+//     },
+//     showLoading: true
+//   })
+//   .then((res) => {
+//     console.log(res.args)
+//     console.log(res.headers)
+//     console.log(res.origin)
+//     console.log(res.url)
+//   })
+
+vgriRequest
+  .get<DataType>({
+    url: '/get',
+    params: {
+      name: 'vgri'
+    },
+    showLoading: true
+  })
+  .then((res) => {
+    console.log(res.args)
+    console.log(res.headers)
+    console.log(res.origin)
+    console.log(res.url)
+  })

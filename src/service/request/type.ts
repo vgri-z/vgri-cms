@@ -3,7 +3,7 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 interface VgriRequestInterceptors {
   requestInterceptor?: (config: AxiosRequestConfig) => AxiosRequestConfig
   requestInterceptorCatch?: (err: any) => any
-  responseInterceptor?: (res: AxiosResponse) => AxiosResponse
+  responseInterceptor?: (res: any) => any
   responseInterceptorCatch?: (err: any) => any
 }
 
