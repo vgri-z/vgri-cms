@@ -33,7 +33,7 @@ const vgriRequest = new VgriRequest({
     }
   }
 })
-
+console.log(vgriRequest)
 export default vgriRequest
 
 // 项目可能会有多个baseurl，时可以创建不同的实例，分别进行网络请求

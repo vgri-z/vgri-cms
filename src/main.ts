@@ -68,11 +68,30 @@ vgriRequest
     params: {
       name: 'vgri'
     },
-    showLoading: true
+    showLoading: true,
+    interceptors: {
+      requestInterceptor: (config) => {
+        console.log('单独请求的请求拦截')
+        return config
+      },
+      responseInterceptor: (res) => {
+        console.log('单独请求的响应拦截')
+        return res
+      }
+    }
   })
   .then((res) => {
-    console.log(res.args)
-    console.log(res.headers)
-    console.log(res.origin)
-    console.log(res.url)
+    console.log(res)
+  })
+
+vgriRequest
+  .post<DataType>({
+    url: '/post',
+    data: {
+      name: 'vgri',
+      age: 18
+    }
+  })
+  .then((res) => {
+    console.log(res)
   })

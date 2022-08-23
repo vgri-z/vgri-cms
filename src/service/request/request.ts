@@ -15,6 +15,7 @@ export class VgriRequest {
   loading?: LoadingInstance
 
   constructor(config: VgriRequestConfig) {
+    console.log('构造器')
     // 创建实例对象instance，保证每次new操作时候的实例都是相互独立，互不干扰的
     this.instance = axios.create(config)
     // 将每个实例独有的拦截器保存下来
@@ -56,9 +57,7 @@ export class VgriRequest {
         console.log('所有请求都有的响应拦截器')
 
         // 关闭loading(请求结束后都要操作，不管请求成功或失败)
-        setTimeout(() => {
-          this.loading?.close()
-        }, 1000)
+        this.loading?.close()
 
         // 根据服务器返回的code显示请求失败信息
         // 请求的HttpErrorCode是200，但是服务器返回的code是不正确的，
@@ -81,11 +80,12 @@ export class VgriRequest {
     )
   }
 
-  request<T>(config: VgriRequestConfig): Promise<T> {
+  request<T>(config: VgriRequestConfig<T>): Promise<T> {
     // 返回一个Promise
     return new Promise((resolve, reject) => {
       // 某一个请求独有的请求拦截
       if (config.interceptors?.requestInterceptor) {
+        // 拦截后，对config进行某种转化后再返回config
         config = config.interceptors.requestInterceptor(config)
       }
 
@@ -112,23 +112,23 @@ export class VgriRequest {
     })
   }
 
-  get<T>(config: VgriRequestConfig): Promise<T> {
+  get<T>(config: VgriRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'GET' })
   }
 
-  post<T>(config: VgriRequestConfig): Promise<T> {
+  post<T>(config: VgriRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'POST' })
   }
 
-  delete<T>(config: VgriRequestConfig): Promise<T> {
+  delete<T>(config: VgriRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'DELETE' })
   }
 
-  patch<T>(config: VgriRequestConfig): Promise<T> {
+  patch<T>(config: VgriRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'PATCH' })
   }
 
-  put<T>(config: VgriRequestConfig): Promise<T> {
+  put<T>(config: VgriRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: 'PUT' })
   }
 }
