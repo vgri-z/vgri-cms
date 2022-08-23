@@ -1,23 +1,42 @@
 {
+  // 编译选项
   "compilerOptions": {
+    // 目标代码(ts -> js(es5/6/7)) 使用bable编译的话，会自动适配es版本，如果使用tsc，就需要写的更明确
     "target": "esnext",
+    // 目标代码需要使用的模块化方案(commonjs -> require/module.exports es module -> import/export)
+    // 这里使用的是es module
+    // umd表示支持多种模块化方案
     "module": "esnext",
+    // 严格检查：一些严格的检查(比如是否使用any)
     "strict": true,
+    // 对jsx进行怎样的处理 preserve标识保留，不转化
     "jsx": "preserve",
+    // 辅助的导入功能
+    "importHelpers": true,
+    // 按照node的方式去解析模块
     "moduleResolution": "node",
+    // 跳过对一些库的类型检测
     "skipLibCheck": true,
+    // export default / module.exports = {}
+    // ex module 和 commonjs 能不能混合使用
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
+    // 要不要生成映射文件(ts -> js)
     "sourceMap": true,
+    // 文件路径解析时，基本的url
     "baseUrl": ".",
+    // 指定具体要解析使用的类型
     "types": ["webpack-env"],
+    // 路径解析(类似于webpack alias)
     "paths": {
       "@/*": ["src/*"]
     },
+    // 可以指定在项目中可以使用哪里库的类型(Proxy/Window/Document)
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
+  // 表示当前有哪些ts代码是需要编译解析的
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
   "exclude": ["node_modules"]
 }

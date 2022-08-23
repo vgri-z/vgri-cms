@@ -84,6 +84,7 @@ export class VgriRequest {
     // 返回一个Promise
     return new Promise((resolve, reject) => {
       // 某一个请求独有的请求拦截
+      // 发送请求时，这里的请求拦截最先执行
       if (config.interceptors?.requestInterceptor) {
         // 拦截后，对config进行某种转化后再返回config
         config = config.interceptors.requestInterceptor(config)
@@ -98,6 +99,7 @@ export class VgriRequest {
       this.instance
         .request<any, T>(config)
         .then((res) => {
+          // 这里的响应拦截最后执行
           if (config.interceptors?.responseInterceptor) {
             res = config.interceptors.responseInterceptor(res)
           }
