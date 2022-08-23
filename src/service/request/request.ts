@@ -13,6 +13,7 @@ export class VgriRequest {
     // 将每个实例独有的拦截器保存下来
     this.interceptors = config.interceptors
 
+    // 添加每个实例独有的拦截器
     this.instance.interceptors.request.use(
       this.interceptors?.requestInterceptor,
       this.interceptors?.responseInterceptorCatch
@@ -20,6 +21,27 @@ export class VgriRequest {
     this.instance.interceptors.response.use(
       this.interceptors?.responseInterceptor,
       this.interceptors?.responseInterceptorCatch
+    )
+
+    // 添加所有实例都有的拦截器
+    this.instance.interceptors.request.use(
+      (config) => {
+        console.log('所有请求都有的请求拦截器')
+        return config
+      },
+      (err) => {
+        return err
+      }
+    )
+
+    this.instance.interceptors.response.use(
+      (res) => {
+        console.log('所有请求都有的响应拦截器')
+        return res
+      },
+      (err) => {
+        return err
+      }
     )
   }
 
