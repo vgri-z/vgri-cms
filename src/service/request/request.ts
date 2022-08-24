@@ -15,7 +15,6 @@ export class VgriRequest {
   loading?: LoadingInstance
 
   constructor(config: VgriRequestConfig) {
-    console.log('构造器')
     // 创建实例对象instance，保证每次new操作时候的实例都是相互独立，互不干扰的
     this.instance = axios.create(config)
     // 将每个实例独有的拦截器保存下来
@@ -36,7 +35,7 @@ export class VgriRequest {
     // 添加所有实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        console.log('所有请求都有的请求拦截器')
+        // console.log('所有请求都有的请求拦截器')
         // 为请求添加loading 全局的loading
         if (this.showLoading) {
           this.loading = ElLoading.service({
@@ -54,7 +53,7 @@ export class VgriRequest {
 
     this.instance.interceptors.response.use(
       (res) => {
-        console.log('所有请求都有的响应拦截器')
+        // console.log('所有请求都有的响应拦截器')
 
         // 关闭loading(请求结束后都要操作，不管请求成功或失败)
         this.loading?.close()

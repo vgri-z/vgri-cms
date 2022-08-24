@@ -9,7 +9,7 @@ const vgriRequest = new VgriRequest({
   // showLoading: true,
   interceptors: {
     requestInterceptor: (config: AxiosRequestConfig) => {
-      console.log('请求拦截成功')
+      // console.log('请求拦截成功')
       // 在请求拦截中添加token
       // token一般添加到请求头里面，具体的添加位置根据实际情况决定，如果只是当前的实例需要，就在当前实例的请求拦截
       // 里面添加，如果所有的实例都需要token，那么就在全局的请求拦截里面添加
@@ -20,20 +20,20 @@ const vgriRequest = new VgriRequest({
       return config
     },
     requestInterceptorCatch: (err) => {
-      console.log('请求拦截失败')
+      // console.log('请求拦截失败')
       return err
     },
     responseInterceptor: (res: AxiosResponse) => {
-      console.log('响应拦截成功')
+      // console.log('响应拦截成功')
       return res
     },
     responseInterceptorCatch: (err) => {
-      console.log('响应拦截失败')
+      // console.log('响应拦截失败')
       return err
     }
   }
 })
-console.log(vgriRequest)
+// console.log(vgriRequest)
 export default vgriRequest
 
 // 只有在new的时候才会调用class中的constructor函数，那为什么在调用class中的request方法时，
