@@ -1,12 +1,26 @@
 import { createStore } from 'vuex'
+import login from './login/login'
+import type { IRootType } from './type'
 
-const store = createStore({
+// vuex createStore接收一个泛型S，这个S就是state的类型或者state返回值的类型
+const store = createStore<IRootType>({
   state() {
-    return {}
+    return {
+      name: 'vgri',
+      password: '1292839',
+      height: ''
+    }
   },
-  mutations: {},
+  mutations: {
+    changeName(state) {
+      state.name = 'lsdgjd'
+    }
+  },
   getters: {},
-  actions: {}
+  actions: {},
+  modules: {
+    login
+  }
 })
 
 export default store
