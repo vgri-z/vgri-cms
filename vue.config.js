@@ -7,6 +7,17 @@ module.exports = defineConfig({
   transpileDependencies: true,
   publicPath: '/',
   outputDir: 'build',
+  devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://152.136.185.210:5000',
+        pathRewrite: {
+          '^/api': ''
+        },
+        changeOrigin: true
+      }
+    }
+  },
   // 1. 对象会被直接合并merge
   configureWebpack: {
     resolve: {
