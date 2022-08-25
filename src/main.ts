@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 import router from './router'
-import store from './store'
+import store, { setupStore } from './store'
 
 import ElementPlus from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
@@ -20,6 +20,7 @@ app.use(store)
 app.use(ElementPlus, {
   locale: zhCn
 })
+setupStore()
 app.mount('#app')
 
 // vgriRequest.request({
