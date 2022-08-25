@@ -17,7 +17,7 @@ const loginModule: Module<ILoginType, IRootType> = {
     return {
       token: '',
       userInfo: {},
-      userMenu: {}
+      userMenus: {}
     }
   },
   mutations: {
@@ -28,7 +28,7 @@ const loginModule: Module<ILoginType, IRootType> = {
       state.userInfo = payload
     },
     changeUserMenus(state, payload: any) {
-      state.userMenu = payload
+      state.userMenus = payload
     }
   },
   getters: {},
