@@ -1,7 +1,9 @@
 <template>
   <div class="main">
     <el-container class="main-content">
-      <el-aside width="210px"></el-aside>
+      <el-aside width="210px">
+        <nav-menu />
+      </el-aside>
       <el-container class="page">
         <el-header class="page-header">header</el-header>
         <el-main class="page-content">main</el-main>
@@ -12,6 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { NavMenu } from '@/components/nav-menu/index'
 
 export default defineComponent({
   setup() {
