@@ -1,4 +1,5 @@
 export interface ILoginType {
-  name: string
-  password: string
+  token: string
+  userInfo: any
+  userMenu: any
 }
