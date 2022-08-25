@@ -23,12 +23,12 @@ import { useStore } from 'vuex'
 import { FormInstance } from 'element-plus'
 import { ref, reactive, defineExpose } from 'vue'
 import { rules } from '../config/login.config'
-import LocalCache from '@/utils/cache'
+import { localCache } from '@/utils/cache'
 
 const store = useStore()
 const account = reactive({
-  name: LocalCache.getCache('userName') ?? '',
-  password: LocalCache.getCache('password') ?? ''
+  name: localCache.getCache('userName') ?? '',
+  password: localCache.getCache('password') ?? ''
 })
 const formRef = ref<FormInstance>()
 
@@ -37,11 +37,11 @@ const login = (isKeepPassword: boolean) => {
     if (valid) {
       if (isKeepPassword) {
         // 记住密码
-        LocalCache.setCache('userName', account.name)
-        LocalCache.setCache('password', account.password)
+        localCache.setCache('userName', account.name)
+        localCache.setCache('password', account.password)
       } else {
-        LocalCache.deleteCache('userName')
-        LocalCache.deleteCache('password')
+        localCache.deleteCache('userName')
+        localCache.deleteCache('password')
       }
 
       // 登录后操作

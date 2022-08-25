@@ -2,7 +2,7 @@ import { VgriRequest } from './request/request'
 // baseURL timeout等变量也应该在一个配置文件中单独配置
 import { BASE_URL, TIME_OUT } from './request/config'
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
-import LocalCache from '@/utils/cache'
+import { localCache } from '@/utils/cache'
 
 const vgriRequest = new VgriRequest({
   baseURL: BASE_URL,
@@ -14,7 +14,7 @@ const vgriRequest = new VgriRequest({
       // 在请求拦截中添加token
       // token一般添加到请求头里面，具体的添加位置根据实际情况决定，如果只是当前的实例需要，就在当前实例的请求拦截
       // 里面添加，如果所有的实例都需要token，那么就在全局的请求拦截里面添加
-      const token = LocalCache.getCache('token')
+      const token = localCache.getCache('token')
       if (token && config.headers) {
         config.headers.Authorization = `Bearer ${token}`
       }

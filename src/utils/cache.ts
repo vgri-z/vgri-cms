@@ -25,4 +25,4 @@ class LocalCache {
   }
 }
 
-export default new LocalCache('vgri')
+export const localCache = new LocalCache('vgri')
