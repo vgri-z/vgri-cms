@@ -22,18 +22,27 @@
 import { FormInstance } from 'element-plus'
 import { ref, reactive, defineExpose } from 'vue'
 import { rules } from '../config/login.config'
+import LocalCache from '@/utils/cache'
 
 const account = reactive({
-  name: '',
-  password: ''
+  name: LocalCache.getCache('userName') ?? '',
+  password: LocalCache.getCache('password') ?? ''
 })
 const formRef = ref<FormInstance>()
 
-const login = () => {
+const login = (isKeepPassword: boolean) => {
   formRef.value?.validate((valid) => {
     if (valid) {
       console.log(account)
       console.log('执行登录逻辑')
+      if (isKeepPassword) {
+        // 记住密码
+        LocalCache.setCache('userName', account.name)
+        LocalCache.setCache('password', account.password)
+      } else {
+        LocalCache.deleteCache('userName')
+        LocalCache.deleteCache('password')
+      }
     }
   })
 }
