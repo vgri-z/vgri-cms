@@ -11,6 +11,7 @@
       background-color="#0c2135"
       text-color="#b7bdc3"
       active-text-color="#0a60bd"
+      :collapse="collapse"
     >
       <template v-for="item in userMenus" :key="item.id">
         <!-- 有二级菜单 -->
@@ -49,6 +50,14 @@
 
 <script setup lang="ts">
 import { useStore } from '@/store'
+import { defineProps, watch } from 'vue'
+
+defineProps({
+  collapse: {
+    type: Boolean,
+    default: false
+  }
+})
 
 // 这里的store是Store<any>类型的，any类型用起来不安全
 const store = useStore()
@@ -59,7 +68,6 @@ const userMenus = store.state.login.userMenus!.map((item) => {
   }
   return item
 })
-console.log(userMenus)
 </script>
 
 <style scoped lang="less">

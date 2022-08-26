@@ -1,26 +1,28 @@
 <template>
   <div class="main">
     <el-container class="main-content">
-      <el-aside width="210px">
-        <nav-menu />
+      <el-aside :width="!isCollapse ? '210px' : '60px'">
+        <nav-menu :collapse="isCollapse" />
       </el-aside>
       <el-container class="page">
-        <el-header class="page-header">header</el-header>
+        <el-header class="page-header">
+          <nav-header @fold-menu="foldMenu" />
+        </el-header>
         <el-main class="page-content">main</el-main>
       </el-container>
     </el-container>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { NavMenu } from '@/components/nav-menu/index'
+import { NavHeader } from '@/components/nav-header/index'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {}
-  }
-})
+const isCollapse = ref(false)
+const foldMenu = (isFold: boolean) => {
+  isCollapse.value = isFold
+}
 </script>
 
 <style scoped lang="less">
