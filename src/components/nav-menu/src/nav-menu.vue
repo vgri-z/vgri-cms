@@ -5,11 +5,17 @@
       <span class="title">vgri-cms</span>
     </div>
     <!-- 菜单 -->
-    <el-menu default-active="2" class="el-menu-vertical">
+    <el-menu
+      default-active="2"
+      class="el-menu-vertical"
+      background-color="#0c2135"
+      text-color="#b7bdc3"
+      active-text-color="#0a60bd"
+    >
       <template v-for="item in userMenus" :key="item.id">
         <!-- 有二级菜单 -->
         <template v-if="item.type === 1">
-          <el-sub-menu>
+          <el-sub-menu :index="item.id + ''">
             <template #title>
               <template v-if="item.icon">
                 <component :class="item.iconName" :is="item.iconName"></component>
@@ -18,7 +24,7 @@
             </template>
 
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item>
+              <el-menu-item :index="subitem.id + ''">
                 <template v-if="subitem.icon">
                   <component :class="subitem.iconName" :is="subitem.iconName"></component>
                 </template>
@@ -29,7 +35,7 @@
         </template>
         <!-- 没有二级菜单 -->
         <template v-else-if="item.type === 2">
-          <el-menu-item>
+          <el-menu-item :index="item.id + ''">
             <template v-if="item.icon">
               <component :class="item.iconName" :is="item.iconName"></component>
             </template>
