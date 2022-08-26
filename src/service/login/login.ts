@@ -1,5 +1,5 @@
 import vgriRequest from '../index'
-import type { IAccount, IDataType, ILoginResult } from './type'
+import type { IAccount, IDataType, ILoginResult, IMenuType } from './type'
 
 enum LoginApi {
   LoginAcount = '/login',
@@ -21,7 +21,7 @@ export function requestUserInfoById(id: number) {
 }
 
 export function requestUserMenusByRoleId(id: number) {
-  return vgriRequest.get<IDataType>({
+  return vgriRequest.get<IDataType<IMenuType[]>>({
     url: LoginApi.UserMenu + id + '/menu'
   })
 }

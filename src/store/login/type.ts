@@ -1,5 +1,7 @@
+import { IMenuType } from '@/service/login/type'
+
 export interface ILoginType {
   token: string
   userInfo: any
-  userMenus: any
+  userMenus: IMenuType[] | null
 }

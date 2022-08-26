@@ -6,7 +6,7 @@ import {
 } from '@/service/login/login'
 import type { IRootType } from '../type'
 import type { ILoginType } from './type'
-import { IAccount } from '@/service/login/type'
+import { IAccount, IMenuType } from '@/service/login/type'
 import { localCache } from '@/utils/cache'
 import router from '@/router'
 
@@ -17,7 +17,7 @@ const loginModule: Module<ILoginType, IRootType> = {
     return {
       token: '',
       userInfo: {},
-      userMenus: {}
+      userMenus: null
     }
   },
   mutations: {
@@ -27,7 +27,7 @@ const loginModule: Module<ILoginType, IRootType> = {
     changeUserInfo(state, payload: any) {
       state.userInfo = payload
     },
-    changeUserMenus(state, payload: any) {
+    changeUserMenus(state, payload: IMenuType[]) {
       state.userMenus = payload
     }
   },
@@ -48,9 +48,9 @@ const loginModule: Module<ILoginType, IRootType> = {
 
       // 3. 获取角色菜单
       const userMenuRes = await requestUserMenusByRoleId(userInfo.role.id)
-      const userMenus = userInfoRes.data
+      const userMenus = userMenuRes.data
       commit('changeUserMenus', userMenus)
-      localCache.setCache('userMenus', userMenuRes)
+      localCache.setCache('userMenus', userMenus)
 
       // 跳转到首页
       router.push('/main')
