@@ -25,7 +25,7 @@
             </template>
 
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="subitem.id + ''">
+              <el-menu-item :index="subitem.id + ''" @click="handleMenuItemClick(subitem)">
                 <template v-if="subitem.icon">
                   <component :class="subitem.iconName" :is="subitem.iconName"></component>
                 </template>
@@ -50,7 +50,9 @@
 
 <script setup lang="ts">
 import { useStore } from '@/store'
+import { useRouter } from 'vue-router'
 import { defineProps, watch } from 'vue'
+import { IMenuType } from '@/service/login/type'
 
 defineProps({
   collapse: {
@@ -61,6 +63,7 @@ defineProps({
 
 // 这里的store是Store<any>类型的，any类型用起来不安全
 const store = useStore()
+const router = useRouter()
 const userMenus = store.state.login.userMenus!.map((item) => {
   item.iconName = item.icon.split('-')[2]
   if (item.name === '随便聊聊') {
@@ -68,6 +71,10 @@ const userMenus = store.state.login.userMenus!.map((item) => {
   }
   return item
 })
+
+const handleMenuItemClick = (subitem: IMenuType) => {
+  router.push(subitem.url)
+}
 </script>
 
 <style scoped lang="less">
