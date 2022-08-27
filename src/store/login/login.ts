@@ -9,6 +9,7 @@ import type { ILoginType } from './type'
 import { IAccount, IMenuType } from '@/service/login/type'
 import { localCache } from '@/utils/cache'
 import router from '@/router'
+import { mapUserMenus } from '@/utils/mapMenus'
 
 // Module接收两个泛型参数，第一个参数时state的类型，第二个是根模块的state的类型
 const loginModule: Module<ILoginType, IRootType> = {
@@ -29,6 +30,12 @@ const loginModule: Module<ILoginType, IRootType> = {
     },
     changeUserMenus(state, payload: IMenuType[]) {
       state.userMenus = payload
+
+      // 动态添加路由
+      const routes = mapUserMenus(state.userMenus)
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
     }
   },
   getters: {},

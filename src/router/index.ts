@@ -37,6 +37,8 @@ router.beforeEach((to) => {
       return '/login'
     }
   }
+
+  // console.log(router.getRoutes())
 })
 
 export default router
