@@ -40,10 +40,13 @@ const accountRef = ref<InstanceType<typeof LoginAcount>>()
 3. useSubdirectories: 表示是否检索其子目录
 4. regExp: 匹配文件的正则表达式，一般是文件名
 ```ts
-require.context('./test', false, /\.test\.js$/);
+const files1 = require.context('./test', false, /\.test\.js$/);
 //（创建出）一个 context，其中文件来自 test 目录，request 以 `.test.js` 结尾。
-require.context('../', true, /\.stories\.js$/);
+const files2 = require.context('../', true, /\.stories\.js$/);
 // （创建出）一个 context，其中所有文件都来自父文件夹及其所有子级文件夹，request 以 `.stories.js` 结尾。
+
+// 调用key方法，返回一个包含检索出来的文件路径的数组
+const files1Keys = files1.key()
 ```
 5. 当上下文环境传入某一个键时，就会得到一个标准的esModule
 
