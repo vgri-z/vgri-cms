@@ -32,3 +32,18 @@ const accountRef = ref<InstanceType<typeof LoginAcount>>()
 菜单动态生成路由的两种方案：
 1). 菜单中就有加载组件的名称和路径，例如有一个{component: 'Role.vue', path: '/main/role'}，要求名称/路径必须要一致
 2). 菜单中只有url，在前端项目中，每一个url -> path -> component，形成一个映射关系，最后生成一个routes[]，通过addRoute方法添加到children数组里面去
+
+### requier.context()
+**https://webpack.docschina.org/guides/dependency-management/#requirecontext**
+1. require.context(directory, useSubdirectories, regExp)，返回一个webapck的上下文环境
+2. directory: 表示检索的目录
+3. useSubdirectories: 表示是否检索其子目录
+4. regExp: 匹配文件的正则表达式，一般是文件名
+```ts
+require.context('./test', false, /\.test\.js$/);
+//（创建出）一个 context，其中文件来自 test 目录，request 以 `.test.js` 结尾。
+require.context('../', true, /\.stories\.js$/);
+// （创建出）一个 context，其中所有文件都来自父文件夹及其所有子级文件夹，request 以 `.stories.js` 结尾。
+```
+5. 当上下文环境传入某一个键时，就会得到一个标准的esModule
+
