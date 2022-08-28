@@ -60,3 +60,7 @@ const files1Keys = files1.key()
 4. 表单type的控制：通过不同的type动态渲染不同类型的表单
 5. 针对select与datePicker添加不同的属性，如果表单项中有其他类型的表达，也需要单独进行属性的添加
 6. 针对各种表单项特有的属性可通过定义一个 otherOptions 属性，将这些特有的属性放在otherOptions中，再通过v-bind动态绑定
+7. 针对样式问题：每一个form-item之间的间距 / form-item的label的宽度大小 / 表单部分的响应式布局
+- form-item的label的宽度大小：添加一个props(有默认值)，也可由父组件决定传入labelWidth的大小
+- 每一个form-item之间的间距：添加一个props(有默认值)，也可由父组件决定form-item之间的间距大小
+- 表单部分的响应式布局：栅格布局 通过设置el-col的属性(xs,sm,md,lg,xl,span)控制响应式，有默认值，也由父组件决定如何进行响应式变化

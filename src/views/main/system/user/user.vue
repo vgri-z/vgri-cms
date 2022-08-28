@@ -1,6 +1,11 @@
 <template>
   <div class="user">
-    <vgri-form :form-items="formItems" />
+    <vgri-form
+      :form-items="formItems"
+      :label-width="labelWidth"
+      :form-item-style="formItemStyle"
+      :col-layout="colLayout"
+    />
   </div>
 </template>
 
@@ -8,6 +13,11 @@
 import { IFormItem, VgriForm } from '@/base-ui/form/index'
 
 const formItems: IFormItem[] = [
+  {
+    type: 'input',
+    label: '电脑名称',
+    placeholder: '请输入电脑名称'
+  },
   {
     type: 'input',
     label: '用户名',
@@ -37,6 +47,12 @@ const formItems: IFormItem[] = [
     }
   }
 ]
+
+const labelWidth = '120px'
+
+const formItemStyle = { padding: '10px 40px' }
+
+const colLayout = { span: 8 }
 </script>
 
 <style scoped lang="less"></style>
