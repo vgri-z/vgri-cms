@@ -9,7 +9,9 @@
           <nav-header @fold-menu="foldMenu" />
         </el-header>
         <el-main class="page-content">
-          <router-view></router-view>
+          <div class="page-info">
+            <router-view></router-view>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -43,6 +45,12 @@ const foldMenu = (isFold: boolean) => {
 
 .page-content {
   height: calc(100% - 48px);
+
+  .page-info {
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+  }
 }
 
 .el-header,

@@ -16,12 +16,12 @@ import './assets/css/index.less'
 // import vgriRequest from './service/index'
 
 const app = createApp(App)
-app.use(router)
 app.use(store)
+setupStore()
+app.use(router)
 app.use(ElementPlus, {
   locale: zhCn
 })
-setupStore()
 app.mount('#app')
 
 // 注册element-icon全局组件
