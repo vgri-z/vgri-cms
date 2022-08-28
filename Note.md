@@ -64,3 +64,4 @@ const files1Keys = files1.key()
 - form-item的label的宽度大小：添加一个props(有默认值)，也可由父组件决定传入labelWidth的大小
 - 每一个form-item之间的间距：添加一个props(有默认值)，也可由父组件决定form-item之间的间距大小
 - 表单部分的响应式布局：栅格布局 通过设置el-col的属性(xs,sm,md,lg,xl,span)控制响应式，有默认值，也由父组件决定如何进行响应式变化
+8. 属性抽取，配置文件抽取，类型合并

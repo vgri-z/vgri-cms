@@ -17,3 +17,10 @@ export interface IFormItem {
   // 每一个表单项可能都有各自的一些特殊的其他属性，如果要用到，都可以将这些属性放在otherOptions里面，然后通过v-bind直接绑定
   otherOptions?: any
 }
+
+export interface IForm {
+  formItems: IFormItem[]
+  labelWidth: string
+  formItemStyle: any
+  colLayout: any
+}
