@@ -6,7 +6,7 @@
     </div>
     <!-- 菜单 -->
     <el-menu
-      default-active="2"
+      :default-active="defaultValue"
       class="el-menu-vertical"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -49,10 +49,12 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useStore } from '@/store'
-import { useRouter } from 'vue-router'
-import { defineProps, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { defineProps } from 'vue'
 import { IMenuType } from '@/service/login/type'
+import { pathMapToMenu } from '@/utils/mapMenus'
 
 defineProps({
   collapse: {
@@ -64,6 +66,10 @@ defineProps({
 // 这里的store是Store<any>类型的，any类型用起来不安全
 const store = useStore()
 const router = useRouter()
+const route = useRoute()
+const defaultValue = ref('2')
+const currentPath = ref('')
+currentPath.value = route.path // 当前路由路径
 const userMenus = store.state.login.userMenus!.map((item) => {
   item.iconName = item.icon.split('-')[2]
   if (item.name === '随便聊聊') {
@@ -71,6 +77,9 @@ const userMenus = store.state.login.userMenus!.map((item) => {
   }
   return item
 })
+
+const menu = pathMapToMenu([userMenus[1]], currentPath.value)
+defaultValue.value = menu.id + ''
 
 const handleMenuItemClick = (subitem: IMenuType) => {
   router.push(subitem.url)

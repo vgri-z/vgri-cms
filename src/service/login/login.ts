@@ -16,12 +16,14 @@ export function accountLoginRequest(account: IAccount) {
 
 export function requestUserInfoById(id: number) {
   return vgriRequest.get<IDataType>({
-    url: LoginApi.UserInfo + id
+    url: LoginApi.UserInfo + id,
+    showLoading: false
   })
 }
 
 export function requestUserMenusByRoleId(id: number) {
   return vgriRequest.get<IDataType<IMenuType[]>>({
-    url: LoginApi.UserMenu + id + '/menu'
+    url: LoginApi.UserMenu + id + '/menu',
+    showLoading: false
   })
 }

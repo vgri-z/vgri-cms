@@ -27,3 +27,17 @@ export const mapUserMenus = (userMenus: IMenuType[]): RouteRecordRaw[] => {
 
   return routes
 }
+
+// 查找当前状态为active的菜单
+export function pathMapToMenu(userMenus: IMenuType[], currentPath: string): any {
+  for (const menu of userMenus) {
+    if (menu.type === 1) {
+      const targetMenu: IMenuType = pathMapToMenu(menu.children ?? [], currentPath)
+      if (targetMenu) {
+        return targetMenu
+      }
+    } else if (menu.type === 2 && menu.url === currentPath) {
+      return menu
+    }
+  }
+}

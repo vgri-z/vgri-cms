@@ -48,7 +48,7 @@ interface Props {
   colLayout: any
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   formItems: () => [],
   labelWidth: '120px',
   formItemStyle: { padding: '10px 40px' },
