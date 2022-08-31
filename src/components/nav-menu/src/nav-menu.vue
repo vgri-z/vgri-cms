@@ -78,7 +78,7 @@ const userMenus = store.state.login.userMenus!.map((item) => {
   return item
 })
 
-const menu = pathMapToMenu([userMenus[1]], currentPath.value)
+const menu = pathMapToMenu(userMenus, currentPath.value)
 defaultValue.value = menu.id + ''
 
 const handleMenuItemClick = (subitem: IMenuType) => {

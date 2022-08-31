@@ -71,3 +71,9 @@ const files1Keys = files1.key()
 1. 设置el-menu组件的default-active的值
 2. 通过递归userMenus，找到与当前路由path对应的那个menu
 3. 将这个menu的id设为default-active的值
+
+## 视频分段
+
+### lesson8
+
+1. 14:00 - 

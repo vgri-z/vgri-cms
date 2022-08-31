@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 // 前面添加一个type关键字，标识导入的是类型，而不是函数/方法，不写也可以，加type看上去更明确
 import type { RouteRecordRaw } from 'vue-router'
 import { localCache } from '@/utils/cache'
+import { firstMenu } from '@/utils/mapMenus'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -39,6 +40,10 @@ router.beforeEach((to) => {
   }
 
   // console.log(router.getRoutes())
+
+  if (to.path === '/main') {
+    return firstMenu.url
+  }
 })
 
 export default router
