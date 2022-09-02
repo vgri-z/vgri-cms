@@ -1,7 +1,7 @@
 <template>
   <div class="breadcrumb">
     <el-breadcrumb separator="/">
-      <template v-for="item in breadcrumbs" :key="item.id">
+      <template v-for="item in breadcrumbs" :key="item.name">
         <el-breadcrumb-item>{{ item.name }}</el-breadcrumb-item>
       </template>
     </el-breadcrumb>

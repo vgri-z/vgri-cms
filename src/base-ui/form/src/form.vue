@@ -11,11 +11,16 @@
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password' ? true : false"
                   v-bind="item.otherOptions"
+                  v-model="formData[`${item.filed}`]"
                 />
               </template>
               <!-- select -->
               <template v-else-if="item.type === 'select'">
-                <el-select v-bind="item.otherOptions" style="width: 100%">
+                <el-select
+                  v-bind="item.otherOptions"
+                  style="width: 100%"
+                  v-model="formData[`${item.filed}`]"
+                >
                   <el-option
                     v-for="option in item.options"
                     :key="option.value"
@@ -26,7 +31,10 @@
               </template>
               <!-- date-picker -->
               <template v-else-if="item.type === 'datePicker'">
-                <el-date-picker v-bind="item.otherOptions"></el-date-picker>
+                <el-date-picker
+                  v-bind="item.otherOptions"
+                  v-model="formData[`${item.filed}`]"
+                ></el-date-picker>
               </template>
             </el-form-item>
           </el-col>
@@ -37,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from 'vue'
+import { withDefaults, defineProps, defineEmits, ref, watch } from 'vue'
 import { IFormItem } from '../types/type'
 
 // props类型声明的方式暂时不支持导入的类型，但是后期可能会支持
@@ -46,9 +54,10 @@ interface Props {
   labelWidth: string
   formItemStyle: any
   colLayout: any
+  modelValue: any
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   formItems: () => [],
   labelWidth: '120px',
   formItemStyle: { padding: '10px 40px' },
@@ -58,8 +67,31 @@ withDefaults(defineProps<Props>(), {
     md: 12,
     lg: 8,
     xl: 6
-  }
+  },
+  modelValue: {}
 })
+
+const emits = defineEmits(['update:modelValue'])
+
+const formData = ref({ ...props.modelValue })
+
+watch(
+  formData,
+  (newValue) => {
+    console.log(newValue)
+    emits('update:modelValue', newValue)
+  },
+  { deep: true }
+)
+
+// const formData = computed({
+//   get: () => props.modelValue,
+//   set: (newValue) => {
+//     // 在修改表单数据的时候，这里的set方法根本没有执行
+//     console.log('==========')
+//     emits('update:modelchange', newValue)
+//   }
+// })
 </script>
 
 <style scoped lang="less">

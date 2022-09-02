@@ -6,21 +6,15 @@ export const searchFormConfig: IForm = {
   colLayout: { span: 8 },
   formItems: [
     {
+      filed: 'id',
       type: 'input',
-      label: '电脑名称',
-      placeholder: '请输入电脑名称'
+      label: 'id',
+      placeholder: '请输入id'
     },
+    { filed: 'name', type: 'input', label: '用户名', placeholder: '请输入用户名' },
+    { filed: 'password', type: 'password', label: '密码', placeholder: '请输入密码' },
     {
-      type: 'input',
-      label: '用户名',
-      placeholder: '请输入用户名'
-    },
-    {
-      type: 'password',
-      label: '密码',
-      placeholder: '请输入密码'
-    },
-    {
+      filed: 'hobbie',
       type: 'select',
       label: '兴趣爱好',
       placeholder: '请选择兴趣爱好',
@@ -30,6 +24,7 @@ export const searchFormConfig: IForm = {
       ]
     },
     {
+      filed: 'createTime',
       type: 'datePicker',
       label: '创建时间',
       otherOptions: {

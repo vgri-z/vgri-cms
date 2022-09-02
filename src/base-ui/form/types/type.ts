@@ -7,6 +7,7 @@ export interface IOption {
 }
 
 export interface IFormItem {
+  filed: string // 表单绑定的字段名称
   type: string
   label: string
   rules?: any[]
