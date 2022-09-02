@@ -2,6 +2,7 @@
 import { createStore, useStore as useVuexStore } from 'vuex'
 import type { Store } from 'vuex'
 import login from './login/login'
+import systemModule from './main/system/system'
 import type { IRootType, IStoreType } from './type'
 
 // vuex createStore接收一个泛型S，这个S就是state的类型或者state返回值的类型
@@ -21,7 +22,8 @@ const store = createStore<IRootType>({
   getters: {},
   actions: {},
   modules: {
-    login
+    login,
+    systemModule
   }
 })
 

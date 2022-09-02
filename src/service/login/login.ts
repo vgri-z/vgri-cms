@@ -1,5 +1,6 @@
 import vgriRequest from '../index'
-import type { IAccount, IDataType, ILoginResult, IMenuType } from './type'
+import type { IAccount, ILoginResult, IMenuType } from './type'
+import { IDataType } from '../types'
 
 enum LoginApi {
   LoginAcount = '/login',

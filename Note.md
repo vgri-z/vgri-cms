@@ -74,6 +74,12 @@ const files1Keys = files1.key()
 
 ### form组件的数据绑定
 
+### 各个模块数据的储存 & vuex模块内部请求方法的封装
+
+* 按照菜单进行划分，分别在vuex中新建system-module、story-module、product-module、analysis-module，分别管理各自模块的数据，这样划分解构比较清晰，易于管理数据
+
+* 由于请求接口地址的url存在公共部分，比如user/list、department/list、role/list等，所以可以对请求list的方法进行封装，传递不同的url，请求不同的列表数据
+
 ## 视频分段
 
 ### lesson8
@@ -82,3 +88,4 @@ const files1Keys = files1.key()
 2. 33:00 - 57:00 面包屑组件封装使用
 3. 57:00 - 01:25:00 表单组件的双向数据绑定
 4. 01:25:00 - 01:38:53 表单组件header footer添加 页面search部分单独抽离
+5. 01:38:53 - 02:05:00 userList数据的获取，vuex中system模块划分以及请求userList数据
