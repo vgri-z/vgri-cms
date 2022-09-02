@@ -1,5 +1,8 @@
 <template>
   <div class="vgri-form">
+    <div class="header">
+      <slot name="header"></slot>
+    </div>
     <el-form label-width="120px">
       <el-row>
         <template v-for="item in formItems" :key="item.lable">
@@ -41,6 +44,9 @@
         </template>
       </el-row>
     </el-form>
+    <div class="footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
