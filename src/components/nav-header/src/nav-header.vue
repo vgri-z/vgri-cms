@@ -2,18 +2,33 @@
   <div class="nav-header">
     <component :is="isFold ? 'Expand' : 'Fold'" @click="handleFold"></component>
     <div class="operate">
-      <div class="breadcrumb">面包屑</div>
+      <vgri-breadcrumbs :breadcrumbs="breadcrumbs" />
       <user-operate />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, computed } from 'vue'
 import UserOperate from './user-operate.vue'
+import { VgriBreadcrumbs } from '@/base-ui/breadcrumb'
+import { useRoute } from 'vue-router'
+import { useStore } from '@/store'
+import { IBreadItem } from '../../../base-ui/breadcrumb/types/type'
+import { pathToBreadcrumb } from '@/utils/mapMenus'
+import { IMenuType } from '@/service/login/type'
 
 const emits = defineEmits(['foldMenu'])
 const isFold = ref(false)
+
+const route = useRoute()
+const store = useStore()
+
+const breadcrumbs = computed<IBreadItem[]>(() => {
+  const currentPath = route.path
+  const userMenus = store.state.login.userMenus
+  return pathToBreadcrumb(userMenus as IMenuType[], currentPath)
+})
 
 const handleFold = () => {
   isFold.value = !isFold.value

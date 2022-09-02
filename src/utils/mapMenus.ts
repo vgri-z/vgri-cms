@@ -1,3 +1,4 @@
+import { IBreadItem } from '@/base-ui/breadcrumb/types/type'
 import { IMenuType } from '@/service/login/type'
 import { RouteRecordRaw } from 'vue-router'
 
@@ -34,12 +35,24 @@ export const mapUserMenus = (userMenus: IMenuType[]): RouteRecordRaw[] => {
   return routes
 }
 
+// 获取面包屑数据
+export function pathToBreadcrumb(userMenus: IMenuType[], currentPath: string): any {
+  const breadcrumbs: IBreadItem[] = []
+  pathMapToMenu(userMenus, currentPath, breadcrumbs)
+  return breadcrumbs
+}
+
 // 查找当前状态为active的菜单
-export function pathMapToMenu(userMenus: IMenuType[], currentPath: string): any {
+export function pathMapToMenu(
+  userMenus: IMenuType[],
+  currentPath: string,
+  breadcrumbs?: IBreadItem[]
+): any {
   for (const menu of userMenus) {
     if (menu.type === 1) {
       const targetMenu = pathMapToMenu(menu.children ?? [], currentPath)
       if (targetMenu) {
+        breadcrumbs?.push(...[menu, targetMenu])
         return targetMenu
       }
     } else if (menu.type === 2) {
