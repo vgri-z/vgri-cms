@@ -35,4 +35,14 @@ const formData = ref({
 })
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.header {
+  color: red;
+  padding: 10px 0;
+}
+
+.btns {
+  text-align: right;
+  padding: 0 50px 20px 0;
+}
+</style>

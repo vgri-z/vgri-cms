@@ -80,6 +80,11 @@ const files1Keys = files1.key()
 
 * 由于请求接口地址的url存在公共部分，比如user/list、department/list、role/list等，所以可以对请求list的方法进行封装，传递不同的url，请求不同的列表数据
 
+### vgri-table组件的封装
+
+* 初步封装，简单抽取
+* 针对每一列展现形式可能不同，有的列按钮展现形式，有的列tag展现，有的列文本展示等，对每一列的内容需要做不同的处理，使用插槽对需要处理的列的内容进行修改，需要注意对作用域插槽的使用以及动态绑定插槽名称
+
 ## 视频分段
 
 ### lesson8
@@ -89,3 +94,4 @@ const files1Keys = files1.key()
 3. 57:00 - 01:25:00 表单组件的双向数据绑定
 4. 01:25:00 - 01:38:53 表单组件header footer添加 页面search部分单独抽离
 5. 01:38:53 - 02:05:00 userList数据的获取，vuex中system模块划分以及请求userList数据
+6. 02:05:00 - 02:27:00 userList数据渲染，vgri-tabel组件初步封装
