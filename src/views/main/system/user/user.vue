@@ -10,8 +10,9 @@
           }}</el-button>
         </template>
         <template #createAt="scope">
-          <strong>{{ $filters.formatTime(scope.row.createAt) }}</strong>
+          {{ $filters.formatTime(scope.row.createAt) }}
         </template>
+        <template #updateAt="scope"> {{ $filters.formatTime(scope.row.updateAt) }}</template>
       </vgri-table>
     </div>
   </div>
