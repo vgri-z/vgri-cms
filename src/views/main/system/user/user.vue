@@ -5,10 +5,12 @@
     <div class="content">
       <vgri-table :user-list="userList" :prop-list="propList">
         <template #status="scope">
-          <el-button>{{ scope.row.enable ? '启用' : '禁用' }}</el-button>
+          <el-button plain :type="scope.row.enable ? 'success' : 'danger'">{{
+            scope.row.enable ? '启用' : '禁用'
+          }}</el-button>
         </template>
         <template #createAt="scope">
-          <strong>{{ scope.row.createAt }}</strong>
+          <strong>{{ $filters.formatTime(scope.row.createAt) }}</strong>
         </template>
       </vgri-table>
     </div>

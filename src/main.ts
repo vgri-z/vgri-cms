@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-
 import router from './router'
 import store, { setupStore } from './store'
 
@@ -12,10 +11,13 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'normalize.css'
 import './assets/css/index.less'
 
+import { globalRegister } from './global'
+
 // import './service/axios_demo'
 // import vgriRequest from './service/index'
 
 const app = createApp(App)
+app.use(globalRegister)
 app.use(store)
 setupStore()
 app.use(router)
