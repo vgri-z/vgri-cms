@@ -59,7 +59,7 @@ interface Props {
   title: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   userList: () => [],
   propList: () => [],
   showIndexColumn: false,
