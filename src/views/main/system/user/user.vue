@@ -35,7 +35,7 @@ store.dispatch('system/getPageListAction', {
 })
 
 const userList = computed(() => store.state.system.userList)
-const userCount = computed(() => store.state.system?.userCount)
+// const userCount = computed(() => store.state.system?.userCount)
 
 const propList = [
   { prop: 'name', label: '用户名', 'min-width': '100' },
