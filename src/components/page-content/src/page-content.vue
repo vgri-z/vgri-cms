@@ -46,14 +46,14 @@ defineProps({
 
 const store = useStore()
 store.dispatch('system/getPageListAction', {
-  url: 'users/list',
+  pageName: 'users',
   queryInfo: {
     offset: 0,
     size: 10
   }
 })
 
-const userList = computed(() => store.state.system.userList)
+const userList = computed(() => store.getters['system/pageListData']('users'))
 // const userCount = computed(() => store.state.system?.userCount)
 
 const handleSelectChange = (event: any[]) => {

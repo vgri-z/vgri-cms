@@ -7,9 +7,9 @@
 
 <script setup lang="ts">
 import { PageSearch } from '@/components/page-search/index'
+import { PageContent } from '@/components/page-content/index'
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
-import { PageContent } from '@/components/page-content/index'
 </script>
 
 <style scoped lang="less"></style>
