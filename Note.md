@@ -125,7 +125,23 @@ const handleRestClick = () => {
 }
 ```
 * 不使用双向绑定：由于双向绑定只是modelvalue与update:modelValue的语法糖，所以直接回归原始模式
-```vue
+```ts
+// <!-- 通过model-value直接绑定page-search传递过来的值，当值发生改变的时候监听update:modelValue事件， -->
+//  <el-input
+//   :placeholder="item.placeholder"
+//   :show-password="item.type === 'password' ? true : false"
+//   v-bind="item.otherOptions"
+//   :model-value="modelValue[`${item.filed}`]"
+//   @update:modelValue="handleModelValueChange($event, item.filed)"
+// />
+
+const emits = defineEmits(['update:modelValue'])
+
+// 发出事件，修改page-search组件中的formData的值
+const handleModelValueChange = (value: any, field: string) => {
+  emits('update:modelValue', { ...props.modelValue, [field]: value })
+}
+
 ```
 
 ## 视频分段
@@ -152,3 +168,4 @@ const handleRestClick = () => {
 
 ### lesson10
 1. 05:00 - 31:00 表单重置后不生效的两种解决办法
+2. 31:00 - 53:00 搜索/重置功能 use-page-search的hooks封装

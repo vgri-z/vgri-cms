@@ -14,7 +14,8 @@
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password' ? true : false"
                   v-bind="item.otherOptions"
-                  v-model="formData[`${item.filed}`]"
+                  :model-value="modelValue[`${item.filed}`]"
+                  @update:modelValue="handleModelValueChange($event, item.filed)"
                 />
               </template>
               <!-- select -->
@@ -22,7 +23,8 @@
                 <el-select
                   v-bind="item.otherOptions"
                   style="width: 100%"
-                  v-model="formData[`${item.filed}`]"
+                  :model-value="modelValue[`${item.filed}`]"
+                  @update:modelValue="handleModelValueChange($event, item.filed)"
                 >
                   <el-option
                     v-for="option in item.options"
@@ -36,7 +38,8 @@
               <template v-else-if="item.type === 'datePicker'">
                 <el-date-picker
                   v-bind="item.otherOptions"
-                  v-model="formData[`${item.filed}`]"
+                  :model-value="modelValue[`${item.filed}`]"
+                  @update:modelValue="handleModelValueChange($event, item.filed)"
                 ></el-date-picker>
               </template>
             </el-form-item>
@@ -79,19 +82,23 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits(['update:modelValue'])
 
+const handleModelValueChange = (value: any, field: string) => {
+  emits('update:modelValue', { ...props.modelValue, [field]: value })
+}
+
 // 对传递过来的数据进行了一层浅拷贝
-const formData = ref({ ...props.modelValue })
+// const formData = ref({ ...props.modelValue })
 
-console.log(formData)
+// console.log(formData)
 
-watch(
-  formData,
-  (newValue) => {
-    // console.log(newValue)
-    emits('update:modelValue', newValue)
-  },
-  { deep: true }
-)
+// watch(
+//   formData,
+//   (newValue) => {
+//     // console.log(newValue)
+//     emits('update:modelValue', newValue)
+//   },
+//   { deep: true }
+// )
 
 // const formData = computed({
 //   get: () => props.modelValue,

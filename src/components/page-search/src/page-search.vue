@@ -37,11 +37,11 @@ for (const item of formItems) {
 const formData = ref(originFormData)
 
 const handleRestClick = () => {
-  // formData.value = originFormData
   // 由于vgri-form对于传递过去的数据只是做了一层浅拷贝，所以修改深层的属性值，是可以监听到的
-  for (const key of Object.keys(originFormData)) {
-    formData.value[key] = originFormData[key]
-  }
+  // for (const key of Object.keys(originFormData)) {
+  //   formData.value[key] = originFormData[key]
+  // }
+  formData.value = originFormData
 }
 
 // const formData = ref({
