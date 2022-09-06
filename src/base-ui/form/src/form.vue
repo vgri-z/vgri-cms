@@ -79,7 +79,10 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emits = defineEmits(['update:modelValue'])
 
+// 对传递过来的数据进行了一层浅拷贝
 const formData = ref({ ...props.modelValue })
+
+console.log(formData)
 
 watch(
   formData,

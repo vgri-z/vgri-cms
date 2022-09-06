@@ -110,6 +110,23 @@ const files1Keys = files1.key()
 * 接口规范：例如/user/list /role/list /menu/list等，可通过传pageName，然后请求时，动态拼接url，或者用一个对象映射，将pageName与url进行一一对应
 * 接口不规范：例如/user/qqq/list /role/www/list /menu/lll/list等，用一个对象映射，将pageName与url进行一一对应
 
+### 表单数据双向绑定中重置不生效的原因
+
+* v-model用于简单数据的双向绑定，例如只有一个name，message，对于引用值，不适合使用v-model，其本质只是一种语法糖
+* 使用双向绑定：
+```ts
+// 点击重置按钮，修改formData的深层属性
+const handleRestClick = () => {
+  // formData.value = originFormData
+  // 由于vgri-form对于传递过去的数据只是做了一层浅拷贝，所以修改深层的属性值，是可以监听到的
+  for (const key of Object.keys(originFormData)) {
+    formData.value[key] = originFormData[key]
+  }
+}
+```
+* 不使用双向绑定：由于双向绑定只是modelvalue与update:modelValue的语法糖，所以直接回归原始模式
+```vue
+```
 
 ## 视频分段
 
