@@ -1,7 +1,7 @@
 <template>
   <div class="page-content">
     <vgri-table
-      :user-list="userList"
+      :list-data="listData"
       v-bind="contentTableConfig"
       @selectChange="handleSelectChange"
     >
@@ -34,26 +34,28 @@
 import { computed, defineProps } from 'vue'
 import { VgriTable } from '@/base-ui/table'
 import { Delete, Edit, Plus, Refresh } from '@element-plus/icons-vue'
-import { contentTableConfig } from '@/views/main/system/user/config/content.config'
 import { useStore } from '@/store'
 
-defineProps({
+const props = defineProps({
   contentTableConfig: {
     type: Object,
     required: true
+  },
+  pageName: {
+    type: String,
+    required: true
   }
 })
-
 const store = useStore()
 store.dispatch('system/getPageListAction', {
-  pageName: 'users',
+  pageName: props.pageName,
   queryInfo: {
     offset: 0,
     size: 10
   }
 })
 
-const userList = computed(() => store.getters['system/pageListData']('users'))
+const listData = computed(() => store.getters['system/pageListData'](props.pageName))
 // const userCount = computed(() => store.state.system?.userCount)
 
 const handleSelectChange = (event: any[]) => {

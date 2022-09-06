@@ -3,10 +3,10 @@ import { IRootType } from '../../type'
 import { ISystemType } from './types'
 import { getPageList } from '@/service/main/system/system'
 
-const pageUrls: { [name: string]: string } = {
-  users: '/users/list',
-  role: '/role/list'
-}
+// const pageUrls: { [name: string]: string } = {
+//   users: '/users/list',
+//   role: '/role/list'
+// }
 
 const systemModule: Module<ISystemType, IRootType> = {
   namespaced: true,

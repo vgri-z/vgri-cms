@@ -10,7 +10,7 @@
         </div>
       </slot>
     </div>
-    <el-table :data="userList" border style="width: 100%" @selection-change="handleSelectionChange">
+    <el-table :data="listData" border style="width: 100%" @selection-change="handleSelectionChange">
       <el-table-column
         v-if="showSelectColumn"
         type="selection"
@@ -49,23 +49,33 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, defineEmits } from 'vue'
+import { withDefaults, defineProps, defineEmits, watch } from 'vue'
 
 interface Props {
-  userList: any[]
+  listData: any[]
   propList: any[]
   showIndexColumn: boolean // 是否显示序号列
   showSelectColumn: boolean // 是否显示多选框列
   title: string
 }
 
-withDefaults(defineProps<Props>(), {
-  userList: () => [],
+const props = withDefaults(defineProps<Props>(), {
+  listData: () => [],
   propList: () => [],
   showIndexColumn: false,
   showSelectColumn: true,
   title: ''
 })
+
+watch(
+  () => props.propList,
+  (newValue) => {
+    console.log(newValue)
+  },
+  {
+    deep: true
+  }
+)
 
 const emits = defineEmits(['selectChange'])
 
