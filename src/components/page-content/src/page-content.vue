@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
+import { computed, defineProps, defineExpose } from 'vue'
 import { VgriTable } from '@/base-ui/table'
 import { Delete, Edit, Plus, Refresh } from '@element-plus/icons-vue'
 import { useStore } from '@/store'
@@ -47,20 +47,31 @@ const props = defineProps({
   }
 })
 const store = useStore()
-store.dispatch('system/getPageListAction', {
-  pageName: props.pageName,
-  queryInfo: {
-    offset: 0,
-    size: 10
-  }
-})
+// 发送请求获取列表数据
+const getListData = (queryInfo: any = {}) => {
+  store.dispatch('system/getPageListAction', {
+    pageName: props.pageName,
+    queryInfo: {
+      offset: 0,
+      size: 10,
+      ...queryInfo
+    }
+  })
+}
 
+getListData()
+
+// 从vuex中取出数据
 const listData = computed(() => store.getters['system/pageListData'](props.pageName))
 // const userCount = computed(() => store.state.system?.userCount)
 
 const handleSelectChange = (event: any[]) => {
   console.log(event)
 }
+
+defineExpose({
+  getListData
+})
 </script>
 
 <style scoped lang="less">

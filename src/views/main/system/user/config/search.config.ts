@@ -12,19 +12,20 @@ export const searchFormConfig: IForm = {
       placeholder: '请输入id'
     },
     { filed: 'name', type: 'input', label: '用户名', placeholder: '请输入用户名' },
-    { filed: 'password', type: 'password', label: '密码', placeholder: '请输入密码' },
+    { filed: 'realname', type: 'input', label: '真实姓名', placeholder: '请输入真实姓名' },
+    { filed: 'cellphone', type: 'input', label: '电话号码', placeholder: '请输入电话号码' },
     {
-      filed: 'hobbie',
+      filed: 'enable',
       type: 'select',
-      label: '兴趣爱好',
-      placeholder: '请选择兴趣爱好',
+      label: '状态',
+      placeholder: '请选择状态',
       options: [
-        { label: '音乐', value: 'music' },
-        { label: '语言', value: 'language' }
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
       ]
     },
     {
-      filed: 'createTime',
+      filed: 'createAt',
       type: 'datePicker',
       label: '创建时间',
       otherOptions: {

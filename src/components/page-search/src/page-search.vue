@@ -6,7 +6,7 @@
       </template>
       <template #footer>
         <div class="btns">
-          <el-button type="primary" :icon="Search">搜索</el-button>
+          <el-button type="primary" :icon="Search" @click="handleSearchClick">搜索</el-button>
           <el-button :icon="Refresh" @click="handleRestClick">重置</el-button>
         </div>
       </template>
@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from 'vue'
+import { ref, defineProps, defineEmits } from 'vue'
 import { VgriForm } from '@/base-ui/form/index'
 import { Search, Refresh } from '@element-plus/icons-vue'
 
@@ -25,6 +25,8 @@ const props = defineProps({
     required: true
   }
 })
+
+const emits = defineEmits(['searchBtnClick', 'resetBtnClick'])
 
 // 双向绑定的属性应该有配置文件的field来决定
 // 优化一：formData中的属性应该动态类决定
@@ -42,6 +44,11 @@ const handleRestClick = () => {
   //   formData.value[key] = originFormData[key]
   // }
   formData.value = originFormData
+  emits('resetBtnClick')
+}
+
+const handleSearchClick = () => {
+  emits('searchBtnClick', formData.value)
 }
 
 // const formData = ref({
