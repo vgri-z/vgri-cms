@@ -1,5 +1,5 @@
 // import { ref } from 'vue'
-// import { PageContent } from '@/components/page-content'
+// import { PageContent } from '@/components/page-content/index'
 
 // export function usePageSearch() {
 //   const pageContentRef = ref<InstanceType<typeof PageContent>>()
@@ -29,11 +29,11 @@ export function usePageSearch() {
     pageContentRef.value?.getListData(queryInfo)
   }
 
-  const tuple: [Ref<InstanceType<typeof PageContent>>, () => void, (queryInfo: any) => void] = [
-    pageContentRef,
-    handleReset,
-    handleSearch
-  ]
+  const handleSearchTuple: [
+    Ref<InstanceType<typeof PageContent>>,
+    () => void,
+    (queryInfo: any) => void
+  ] = [pageContentRef, handleReset, handleSearch]
 
-  return tuple
+  return handleSearchTuple
 }

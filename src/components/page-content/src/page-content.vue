@@ -4,6 +4,8 @@
       :list-data="listData"
       v-bind="contentTableConfig"
       @selectChange="handleSelectChange"
+      :list-count="listCount"
+      v-model:page="pageInfo"
     >
       <!-- header插槽 -->
       <template #headerHandler>
@@ -31,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineExpose } from 'vue'
+import { computed, defineProps, defineExpose, ref, watch } from 'vue'
 import { VgriTable } from '@/base-ui/table'
 import { Delete, Edit, Plus, Refresh } from '@element-plus/icons-vue'
 import { useStore } from '@/store'
@@ -47,13 +49,18 @@ const props = defineProps({
   }
 })
 const store = useStore()
+
+const pageInfo = ref({ currentPage: 1, pageSize: 10 })
+watch(pageInfo, () => {
+  getListData()
+})
 // 发送请求获取列表数据
 const getListData = (queryInfo: any = {}) => {
   store.dispatch('system/getPageListAction', {
     pageName: props.pageName,
     queryInfo: {
-      offset: 0,
-      size: 10,
+      offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
+      size: pageInfo.value.pageSize,
       ...queryInfo
     }
   })
@@ -63,7 +70,7 @@ getListData()
 
 // 从vuex中取出数据
 const listData = computed(() => store.getters['system/pageListData'](props.pageName))
-// const userCount = computed(() => store.state.system?.userCount)
+const listCount = computed(() => store.getters['system/pageListCount'](props.pageName))
 
 const handleSelectChange = (event: any[]) => {
   console.log(event)

@@ -38,10 +38,14 @@
       <!-- 表格的footer基本都是分页 -->
       <slot name="footer">
         <el-pagination
-          :page-sizes="[100, 200, 300, 400]"
+          :currentPage="page.currentPage"
+          :page-size="page.pageSize"
+          :page-sizes="[10, 20, 30]"
           small="small"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400"
+          :total="listCount"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
         />
       </slot>
     </div>
@@ -57,6 +61,8 @@ interface Props {
   showIndexColumn: boolean // 是否显示序号列
   showSelectColumn: boolean // 是否显示多选框列
   title: string
+  listCount: number
+  page: any
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -64,7 +70,9 @@ const props = withDefaults(defineProps<Props>(), {
   propList: () => [],
   showIndexColumn: false,
   showSelectColumn: true,
-  title: ''
+  title: '',
+  listCount: 0,
+  page: () => ({ currentPage: 0, pageSize: 3 })
 })
 
 watch(
@@ -77,10 +85,17 @@ watch(
   }
 )
 
-const emits = defineEmits(['selectChange'])
+const emits = defineEmits(['selectChange', 'update:page'])
 
 const handleSelectionChange = (event: any[]) => {
   emits('selectChange', event)
+}
+
+const handleSizeChange = (pageSize: number) => {
+  emits('update:page', { ...props.page, pageSize })
+}
+const handleCurrentChange = (currentPage: number) => {
+  emits('update:page', { ...props.page, currentPage })
 }
 </script>
 

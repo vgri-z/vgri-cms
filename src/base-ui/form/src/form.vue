@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, defineEmits, ref, watch } from 'vue'
+import { withDefaults, defineProps, defineEmits } from 'vue'
 import { IFormItem } from '../types/type'
 
 // props类型声明的方式暂时不支持导入的类型，但是后期可能会支持
