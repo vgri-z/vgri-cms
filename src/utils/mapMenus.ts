@@ -63,4 +63,23 @@ export function pathMapToMenu(
   }
 }
 
+// 获取用户权限列表
+export function mapMenuToPermission(userMenus: any[]) {
+  const userPermissions: string[] = []
+
+  const _recurseUserMenus = (menus: IMenuType[]) => {
+    for (const menu of menus) {
+      if (menu.type === 1 || menu.type === 2) {
+        _recurseUserMenus(menu.children ?? [])
+      } else if (menu.type === 3) {
+        userPermissions.push(menu.permission!)
+      }
+    }
+  }
+
+  _recurseUserMenus(userMenus)
+
+  return userPermissions
+}
+
 export { firstMenu }

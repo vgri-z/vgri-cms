@@ -144,6 +144,12 @@ const handleModelValueChange = (value: any, field: string) => {
 
 ```
 
+### 按钮的权限管理
+
+1. 通过递归遍历用户菜单获取当前用所拥有的所有的按钮权限
+2. 封装一个hooks，通过pageName与权限名称判断该用户是否拥有该权限，得出一个布尔值
+3. 将得出的布尔值绑定到用户操作按钮上，控制该操作按钮的显隐
+
 ## 视频分段
 
 ### lesson8

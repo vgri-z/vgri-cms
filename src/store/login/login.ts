@@ -9,7 +9,7 @@ import type { ILoginType } from './type'
 import { IAccount, IMenuType } from '@/service/login/type'
 import { localCache } from '@/utils/cache'
 import router from '@/router'
-import { mapUserMenus } from '@/utils/mapMenus'
+import { mapMenuToPermission, mapUserMenus } from '@/utils/mapMenus'
 
 // Module接收两个泛型参数，第一个参数时state的类型，第二个是根模块的state的类型
 const loginModule: Module<ILoginType, IRootType> = {
@@ -18,7 +18,8 @@ const loginModule: Module<ILoginType, IRootType> = {
     return {
       token: '',
       userInfo: {},
-      userMenus: null
+      userMenus: null,
+      permissions: []
     }
   },
   mutations: {
@@ -36,6 +37,10 @@ const loginModule: Module<ILoginType, IRootType> = {
       routes.forEach((route) => {
         router.addRoute('main', route)
       })
+
+      // 获取用户按钮权限
+      const permissions = mapMenuToPermission(state.userMenus)
+      state.permissions = permissions
     }
   },
   getters: {},

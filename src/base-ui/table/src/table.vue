@@ -6,7 +6,7 @@
       <slot name="tableHeader">
         <div class="title">{{ title }}</div>
         <div class="handle-btns">
-          <slot name="headerHandler"></slot>
+          <slot name="headerHandler" :text="createText"></slot>
         </div>
       </slot>
     </div>
@@ -66,11 +66,12 @@ interface Props {
   propList: any[]
   showIndexColumn?: boolean // 是否显示序号列
   showSelectColumn?: boolean // 是否显示多选框列
+  createText?: string
   title: string
   listCount: number
   page: any
   isShowFooter?: boolean
-  childrenProps: any
+  childrenProps?: any
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -78,6 +79,7 @@ const props = withDefaults(defineProps<Props>(), {
   propList: () => [],
   showIndexColumn: false,
   showSelectColumn: false,
+  createText: '新建用户',
   title: '',
   listCount: 0,
   page: () => ({ currentPage: 0, pageSize: 3 }),

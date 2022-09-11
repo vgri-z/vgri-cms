@@ -4,4 +4,5 @@ export interface ILoginType {
   token: string
   userInfo: any
   userMenus: IMenuType[] | null
+  permissions: string[]
 }

@@ -18,4 +18,5 @@ export interface IMenuType {
   type: number
   url: string
   iconName?: string
+  permission?: string
 }

@@ -14,5 +14,6 @@ export const contentTableConfig = {
   childrenProps: {
     rowKey: 'id',
     treeProps: { children: 'children', hasChildren: 'hasChildren' }
-  }
+  },
+  createText: '新建菜单'
 }

@@ -8,5 +8,6 @@ export const contentTableConfig = {
   ],
   title: '角色列表',
   showIndexColumn: true,
-  showSelectColumn: true
+  showSelectColumn: true,
+  createText: '新建角色'
 }
