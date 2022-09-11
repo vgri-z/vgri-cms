@@ -10,7 +10,13 @@
         </div>
       </slot>
     </div>
-    <el-table :data="listData" border style="width: 100%" @selection-change="handleSelectionChange">
+    <el-table
+      :data="listData"
+      border
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+      v-bind="childrenProps"
+    >
       <el-table-column
         v-if="showSelectColumn"
         type="selection"
@@ -34,7 +40,7 @@
         </el-table-column>
       </template>
     </el-table>
-    <div class="footer">
+    <div class="footer" v-if="isShowFooter">
       <!-- 表格的footer基本都是分页 -->
       <slot name="footer">
         <el-pagination
@@ -58,21 +64,25 @@ import { withDefaults, defineProps, defineEmits, watch } from 'vue'
 interface Props {
   listData: any[]
   propList: any[]
-  showIndexColumn: boolean // 是否显示序号列
-  showSelectColumn: boolean // 是否显示多选框列
+  showIndexColumn?: boolean // 是否显示序号列
+  showSelectColumn?: boolean // 是否显示多选框列
   title: string
   listCount: number
   page: any
+  isShowFooter?: boolean
+  childrenProps: any
 }
 
 const props = withDefaults(defineProps<Props>(), {
   listData: () => [],
   propList: () => [],
   showIndexColumn: false,
-  showSelectColumn: true,
+  showSelectColumn: false,
   title: '',
   listCount: 0,
-  page: () => ({ currentPage: 0, pageSize: 3 })
+  page: () => ({ currentPage: 0, pageSize: 3 }),
+  isShowFooter: true,
+  childrenProps: () => ({})
 })
 
 watch(

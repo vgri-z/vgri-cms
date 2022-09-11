@@ -5,4 +5,6 @@ export interface ISystemType {
   roleCount: number
   goodsList: any[]
   goodsCount: number
+  menuList: any[]
+  menuCount: number
 }

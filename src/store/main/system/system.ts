@@ -17,7 +17,9 @@ const systemModule: Module<ISystemType, IRootType> = {
       roleList: [],
       roleCount: 0,
       goodsList: [],
-      goodsCount: 0
+      goodsCount: 0,
+      menuList: [],
+      menuCount: 0
     }
   },
   mutations: {
@@ -38,6 +40,12 @@ const systemModule: Module<ISystemType, IRootType> = {
     },
     changeGoodsCount(state, goodsCount: number) {
       state.goodsCount = goodsCount
+    },
+    changeMenuList(state, menuList: any[]) {
+      state.menuList = menuList
+    },
+    changeMenuCount(state, menuCount: number) {
+      state.menuCount = menuCount
     }
   },
   getters: {
@@ -72,7 +80,7 @@ const systemModule: Module<ISystemType, IRootType> = {
       // }
 
       const changeName = pageName.slice(0, 1).toUpperCase() + pageName.slice(1)
-      console.log(changeName)
+      // console.log(changeName)
 
       const res = await getPageList(pageUrl, payload.queryInfo)
       const { list, totalCount } = res.data

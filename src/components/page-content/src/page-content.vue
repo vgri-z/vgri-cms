@@ -84,7 +84,6 @@ const otherPropSlots = props.contentTableConfig.propList.filter((item: any) => {
   if (item.slotName === 'handler') return false
   return true
 })
-console.log(otherPropSlots)
 
 const handleSelectChange = (event: any[]) => {
   console.log(event)
