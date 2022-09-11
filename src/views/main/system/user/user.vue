@@ -5,11 +5,13 @@
       @reset-btn-click="handleReset"
       @search-btn-click="handleSearch"
     />
-    <page-content
-      :content-table-config="contentTableConfig"
-      page-name="users"
-      ref="pageContentRef"
-    />
+    <page-content :content-table-config="contentTableConfig" page-name="users" ref="pageContentRef">
+      <template #status="scope">
+        <el-button plain size="small" :type="scope.row.enable ? 'success' : 'danger'">{{
+          scope.row.enable ? '启用' : '禁用'
+        }}</el-button>
+      </template>
+    </page-content>
   </div>
 </template>
 

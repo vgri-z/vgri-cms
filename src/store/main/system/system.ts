@@ -15,7 +15,9 @@ const systemModule: Module<ISystemType, IRootType> = {
       usersList: [],
       usersCount: 0,
       roleList: [],
-      roleCount: 0
+      roleCount: 0,
+      goodsList: [],
+      goodsCount: 0
     }
   },
   mutations: {
@@ -30,6 +32,12 @@ const systemModule: Module<ISystemType, IRootType> = {
     },
     changeRoleCount(state, roleCount: number) {
       state.roleCount = roleCount
+    },
+    changeGoodsList(state, goodsList: any[]) {
+      state.goodsList = goodsList
+    },
+    changeGoodsCount(state, goodsCount: number) {
+      state.goodsCount = goodsCount
     }
   },
   getters: {
@@ -63,18 +71,23 @@ const systemModule: Module<ISystemType, IRootType> = {
       //     break
       // }
 
+      const changeName = pageName.slice(0, 1).toUpperCase() + pageName.slice(1)
+      console.log(changeName)
+
       const res = await getPageList(pageUrl, payload.queryInfo)
       const { list, totalCount } = res.data
-      switch (pageName) {
-        case 'users':
-          commit('changeUsersList', list)
-          commit('changeUsersCount', totalCount)
-          break
-        case 'role':
-          commit('changeRoleList', list)
-          commit('changeRoleCount', totalCount)
-          break
-      }
+      commit(`change${changeName}List`, list)
+      commit(`change${changeName}Count`, totalCount)
+      // switch (pageName) {
+      //   case 'users':
+      //     commit('changeUsersList', list)
+      //     commit('changeUsersCount', totalCount)
+      //     break
+      //   case 'role':
+      //     commit('changeRoleList', list)
+      //     commit('changeRoleCount', totalCount)
+      //     break
+      // }
     }
   }
 }
