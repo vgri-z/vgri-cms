@@ -8,4 +8,5 @@ export interface ISystemType {
   menuList: any[]
   menuCount: number
   pageInfo: any
+  pageQuery: any
 }

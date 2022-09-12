@@ -13,7 +13,8 @@ const systemModule: Module<ISystemType, IRootType> = {
   namespaced: true,
   state() {
     return {
-      pageInfo: {},
+      pageInfo: { currentPage: 1, pageSize: 4 },
+      pageQuery: {},
       usersList: [],
       usersCount: 0,
       roleList: [],
@@ -27,6 +28,9 @@ const systemModule: Module<ISystemType, IRootType> = {
   mutations: {
     changePageInfo(state, pageInfo: any) {
       state.pageInfo = pageInfo
+    },
+    changePageQuery(state, pageQuery: any) {
+      state.pageQuery = pageQuery
     },
     changeUsersList(state, usersList: any[]) {
       state.usersList = usersList
@@ -115,9 +119,11 @@ const systemModule: Module<ISystemType, IRootType> = {
           message: res.data,
           type: 'success'
         })
+        // 获取所有的请求参数
         const queryInfo = {
           offset: (state.pageInfo.currentPage - 1) * state.pageInfo.pageSize,
-          size: state.pageInfo.pageSize
+          size: state.pageInfo.pageSize,
+          ...state.pageQuery
         }
         console.log(queryInfo)
         // 重新请求列表数据

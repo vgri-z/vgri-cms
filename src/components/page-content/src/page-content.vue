@@ -69,8 +69,8 @@ const isQuery = usePermission(props.pageName, 'query')
 
 // 1. 双向绑定pageInfo数据
 const pageInfo = ref({ currentPage: 1, pageSize: 4 })
-store.commit('system/changePageInfo', pageInfo.value)
 watch(pageInfo, () => {
+  // 同步更新vuex中保存的page参数
   store.commit('system/changePageInfo', pageInfo.value)
   getListData()
 })
