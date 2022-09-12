@@ -18,9 +18,15 @@
         {{ $filters.formatTime(scope.row.createAt) }}
       </template>
       <template #updateAt="scope"> {{ $filters.formatTime(scope.row.updateAt) }}</template>
-      <template #handler>
+      <template #handler="scope">
         <el-button v-if="isUpdate" size="small" text type="primary" :icon="Edit">编辑</el-button>
-        <el-button v-if="isDelete" size="small" text type="danger" :icon="Delete">删除</el-button>
+        <el-popconfirm title="是否确认删除？" @confirm="deletePageDate(scope.row)">
+          <template #reference>
+            <el-button v-if="isDelete" size="small" text type="danger" :icon="Delete">
+              删除
+            </el-button>
+          </template>
+        </el-popconfirm>
       </template>
       <!-- 动态插入各模块各自的插槽 -->
       <template v-for="item in otherPropSlots" :key="item.prop" #[item.slotName]="scope">
@@ -66,6 +72,7 @@ const pageInfo = ref({ currentPage: 1, pageSize: 10 })
 watch(pageInfo, () => {
   getListData()
 })
+
 // 2. 发送请求获取列表数据
 const getListData = (queryInfo: any = {}) => {
   if (!isQuery) return // 没有查询权限，什么也不给查看
@@ -92,6 +99,11 @@ const otherPropSlots = props.contentTableConfig.propList.filter((item: any) => {
   if (item.slotName === 'handler') return false
   return true
 })
+
+// 5. 删除列表数据
+const deletePageDate = (row: any) => {
+  store.dispatch('system/deletePageDataAction', { pageName: props.pageName, id: row.id })
+}
 
 const handleSelectChange = (event: any[]) => {
   console.log(event)

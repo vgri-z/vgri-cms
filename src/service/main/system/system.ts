@@ -7,3 +7,9 @@ export function getPageList(url: string, queryInfo: any) {
     data: queryInfo
   })
 }
+
+export function deletePageData(url: string) {
+  return vgriRequest.delete<IDataType>({
+    url
+  })
+}

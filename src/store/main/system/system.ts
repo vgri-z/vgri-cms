@@ -1,7 +1,8 @@
 import { Module } from 'vuex'
 import { IRootType } from '../../type'
 import { ISystemType } from './types'
-import { getPageList } from '@/service/main/system/system'
+import { deletePageData, getPageList } from '@/service/main/system/system'
+import { ElMessage } from 'element-plus'
 
 // const pageUrls: { [name: string]: string } = {
 //   users: '/users/list',
@@ -62,6 +63,7 @@ const systemModule: Module<ISystemType, IRootType> = {
     }
   },
   actions: {
+    // 获取列表数据
     async getPageListAction({ commit }, payload) {
       // 根据传入的pageName动态匹配请求url
       const pageName: string = payload.pageName
@@ -96,6 +98,28 @@ const systemModule: Module<ISystemType, IRootType> = {
       //     commit('changeRoleCount', totalCount)
       //     break
       // }
+    },
+
+    // 删除列表数据
+    async deletePageDataAction({ dispatch }, payload) {
+      const { pageName, id } = payload
+      const url = `/${pageName}/${id}`
+
+      const res = await deletePageData(url)
+      if (res.code === 0) {
+        ElMessage({
+          message: res.data,
+          type: 'success'
+        })
+        // 重新请求列表数据
+        dispatch('getPageListAction', {
+          pageName,
+          queryInfo: {
+            offset: 0,
+            size: 10
+          }
+        })
+      }
     }
   }
 }
