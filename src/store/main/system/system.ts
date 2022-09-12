@@ -13,6 +13,7 @@ const systemModule: Module<ISystemType, IRootType> = {
   namespaced: true,
   state() {
     return {
+      pageInfo: {},
       usersList: [],
       usersCount: 0,
       roleList: [],
@@ -24,6 +25,9 @@ const systemModule: Module<ISystemType, IRootType> = {
     }
   },
   mutations: {
+    changePageInfo(state, pageInfo: any) {
+      state.pageInfo = pageInfo
+    },
     changeUsersList(state, usersList: any[]) {
       state.usersList = usersList
     },
@@ -101,7 +105,7 @@ const systemModule: Module<ISystemType, IRootType> = {
     },
 
     // 删除列表数据
-    async deletePageDataAction({ dispatch }, payload) {
+    async deletePageDataAction({ dispatch, state }, payload) {
       const { pageName, id } = payload
       const url = `/${pageName}/${id}`
 
@@ -111,13 +115,15 @@ const systemModule: Module<ISystemType, IRootType> = {
           message: res.data,
           type: 'success'
         })
+        const queryInfo = {
+          offset: (state.pageInfo.currentPage - 1) * state.pageInfo.pageSize,
+          size: state.pageInfo.pageSize
+        }
+        console.log(queryInfo)
         // 重新请求列表数据
         dispatch('getPageListAction', {
           pageName,
-          queryInfo: {
-            offset: 0,
-            size: 10
-          }
+          queryInfo
         })
       }
     }

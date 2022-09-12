@@ -68,8 +68,10 @@ const isDelete = usePermission(props.pageName, 'delete')
 const isQuery = usePermission(props.pageName, 'query')
 
 // 1. 双向绑定pageInfo数据
-const pageInfo = ref({ currentPage: 1, pageSize: 10 })
+const pageInfo = ref({ currentPage: 1, pageSize: 4 })
+store.commit('system/changePageInfo', pageInfo.value)
 watch(pageInfo, () => {
+  store.commit('system/changePageInfo', pageInfo.value)
   getListData()
 })
 

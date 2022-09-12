@@ -7,4 +7,5 @@ export interface ISystemType {
   goodsCount: number
   menuList: any[]
   menuCount: number
+  pageInfo: any
 }
