@@ -131,8 +131,8 @@ const handleRestClick = () => {
 //   :placeholder="item.placeholder"
 //   :show-password="item.type === 'password' ? true : false"
 //   v-bind="item.otherOptions"
-//   :model-value="modelValue[`${item.filed}`]"
-//   @update:modelValue="handleModelValueChange($event, item.filed)"
+//   :model-value="modelValue[`${item.field}`]"
+//   @update:modelValue="handleModelValueChange($event, item.field)"
 // />
 
 const emits = defineEmits(['update:modelValue'])

@@ -36,7 +36,7 @@ const emits = defineEmits(['searchBtnClick', 'resetBtnClick'])
 const formItems = props.searchFormConfig?.formItems ?? []
 const originFormData: any = {}
 for (const item of formItems) {
-  originFormData[item.filed] = ''
+  originFormData[item.field] = ''
 }
 
 const formData = ref(originFormData)

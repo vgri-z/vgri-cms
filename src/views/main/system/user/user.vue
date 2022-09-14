@@ -41,13 +41,13 @@ const [pageContentRef, handleReset, handleSearch] = usePageSearch()
 
 // 显示密码输入框
 const newCallback = () => {
-  const passwordItem = modalConfig.formItems.find((item) => item.filed === 'password')
+  const passwordItem = modalConfig.formItems.find((item) => item.field === 'password')
   passwordItem!.isHidden = false
   console.log(modalConfig)
 }
 // 隐藏密码输入框
 const editCallback = () => {
-  const passwordItem = modalConfig.formItems.find((item) => item.filed === 'password')
+  const passwordItem = modalConfig.formItems.find((item) => item.field === 'password')
   passwordItem!.isHidden = true
   console.log(modalConfig)
 }

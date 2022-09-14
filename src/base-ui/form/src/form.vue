@@ -19,8 +19,8 @@
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password' ? true : false"
                   v-bind="item.otherOptions"
-                  :model-value="modelValue[`${item.filed}`]"
-                  @update:modelValue="handleModelValueChange($event, item.filed)"
+                  :model-value="modelValue[`${item.field}`]"
+                  @update:modelValue="handleModelValueChange($event, item.field)"
                 />
               </template>
               <!-- select -->
@@ -28,8 +28,8 @@
                 <el-select
                   v-bind="item.otherOptions"
                   style="width: 100%"
-                  :model-value="modelValue[`${item.filed}`]"
-                  @update:modelValue="handleModelValueChange($event, item.filed)"
+                  :model-value="modelValue[`${item.field}`]"
+                  @update:modelValue="handleModelValueChange($event, item.field)"
                 >
                   <el-option
                     v-for="option in item.options"
@@ -43,8 +43,8 @@
               <template v-else-if="item.type === 'datePicker'">
                 <el-date-picker
                   v-bind="item.otherOptions"
-                  :model-value="modelValue[`${item.filed}`]"
-                  @update:modelValue="handleModelValueChange($event, item.filed)"
+                  :model-value="modelValue[`${item.field}`]"
+                  @update:modelValue="handleModelValueChange($event, item.field)"
                 ></el-date-picker>
               </template>
             </el-form-item>

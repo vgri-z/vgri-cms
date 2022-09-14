@@ -5,10 +5,10 @@ export const searchFormConfig: IForm = {
   formItemStyle: { padding: '10px 40px' },
   colLayout: { span: 8 },
   formItems: [
-    { filed: 'name', type: 'input', label: '角色名', placeholder: '请输入用户名' },
-    { filed: 'intro', type: 'input', label: '权限介绍', placeholder: '请输入权限介绍' },
+    { field: 'name', type: 'input', label: '角色名', placeholder: '请输入用户名' },
+    { field: 'intro', type: 'input', label: '权限介绍', placeholder: '请输入权限介绍' },
     {
-      filed: 'createTime',
+      field: 'createTime',
       type: 'datePicker',
       label: '创建时间',
       otherOptions: {
