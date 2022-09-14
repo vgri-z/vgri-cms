@@ -12,15 +12,18 @@
         }}</el-button>
       </template>
     </page-content>
+    <page-modal :modal-config="modalConfig"></page-modal>
   </div>
 </template>
 
 <script setup lang="ts">
 import { PageSearch } from '@/components/page-search/index'
 import { PageContent } from '@/components/page-content/index'
+import { PageModal } from '@/components/page-modal/index'
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
 import { usePageSearch } from '@/hooks'
+import { modalConfig } from './config/modal.config'
 
 const [pageContentRef, handleReset, handleSearch] = usePageSearch()
 </script>

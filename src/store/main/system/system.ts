@@ -13,7 +13,7 @@ const systemModule: Module<ISystemType, IRootType> = {
   namespaced: true,
   state() {
     return {
-      pageInfo: { currentPage: 1, pageSize: 4 },
+      pageInfo: { currentPage: 1, pageSize: 10 },
       pageQuery: {},
       usersList: [],
       usersCount: 0,
