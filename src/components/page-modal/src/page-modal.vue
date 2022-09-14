@@ -1,6 +1,6 @@
 <template>
   <div class="page-modal">
-    <el-dialog v-model="dialogVisible" :title="title" width="30%" center>
+    <el-dialog v-model="dialogVisible" :title="title" width="30%" center destroy-on-close>
       <vgri-form v-bind="modalConfig" v-model="formData"></vgri-form>
       <template #footer>
         <span class="dialog-footer">

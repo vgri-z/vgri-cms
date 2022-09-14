@@ -20,8 +20,8 @@
     </page-content>
     <page-modal
       :modal-config="modalConfig"
-      ref="pageModalRef"
       :default-info="defaultInfo"
+      ref="pageModalRef"
     ></page-modal>
   </div>
 </template>
@@ -38,7 +38,24 @@ import { modalConfig } from './config/modal.config'
 import { usePageSearch, usePageModal } from '@/hooks'
 
 const [pageContentRef, handleReset, handleSearch] = usePageSearch()
-const [pageModalRef, defaultInfo, handleCreateData, handleEditData] = usePageModal()
+
+// 显示密码输入框
+const newCallback = () => {
+  const passwordItem = modalConfig.formItems.find((item) => item.filed === 'password')
+  passwordItem!.isHidden = false
+  console.log(modalConfig)
+}
+// 隐藏密码输入框
+const editCallback = () => {
+  const passwordItem = modalConfig.formItems.find((item) => item.filed === 'password')
+  passwordItem!.isHidden = true
+  console.log(modalConfig)
+}
+
+const [pageModalRef, defaultInfo, handleCreateData, handleEditData] = usePageModal(
+  newCallback,
+  editCallback
+)
 </script>
 
 <style scoped lang="less"></style>
