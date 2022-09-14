@@ -9,7 +9,9 @@
     >
       <!-- header插槽 -->
       <template #headerHandler="scope">
-        <el-button v-if="isCreate" :icon="Plus" type="primary">{{ scope.text }}</el-button>
+        <el-button v-if="isCreate" :icon="Plus" type="primary" @click="handleNewClick">
+          {{ scope.text }}
+        </el-button>
         <el-button :icon="Refresh" type="primary">刷新</el-button>
       </template>
       <!-- 表格列插槽 -->
@@ -19,7 +21,16 @@
       </template>
       <template #updateAt="scope"> {{ $filters.formatTime(scope.row.updateAt) }}</template>
       <template #handler="scope">
-        <el-button v-if="isUpdate" size="small" text type="primary" :icon="Edit">编辑</el-button>
+        <el-button
+          v-if="isUpdate"
+          size="small"
+          text
+          type="primary"
+          :icon="Edit"
+          @click="handleEditClick(scope.row)"
+        >
+          编辑
+        </el-button>
         <el-popconfirm title="是否确认删除？" @confirm="deletePageDate(scope.row)">
           <template #reference>
             <el-button v-if="isDelete" size="small" text type="danger" :icon="Delete">
@@ -43,11 +54,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineExpose, ref, watch } from 'vue'
+import { computed, defineProps, defineExpose, ref, watch, defineEmits } from 'vue'
 import { VgriTable } from '@/base-ui/table'
 import { Delete, Edit, Plus, Refresh } from '@element-plus/icons-vue'
 import { useStore } from '@/store'
 import { usePermission } from '@/hooks/index'
+
+const emits = defineEmits(['handleNewClick', 'handleEditClick'])
 
 const props = defineProps({
   contentTableConfig: {
@@ -102,9 +115,16 @@ const otherPropSlots = props.contentTableConfig.propList.filter((item: any) => {
   return true
 })
 
-// 5. 删除列表数据
+// 5. 删除/新建/编辑列表数据
 const deletePageDate = (row: any) => {
   store.dispatch('system/deletePageDataAction', { pageName: props.pageName, id: row.id })
+}
+const handleNewClick = () => {
+  emits('handleNewClick')
+}
+
+const handleEditClick = (row: any) => {
+  emits('handleEditClick', row)
 }
 
 const handleSelectChange = (event: any[]) => {

@@ -13,22 +13,37 @@
 </template>
 
 <script setup lang="ts">
-import { ref, withDefaults, defineProps } from 'vue'
+import { ref, withDefaults, defineProps, defineExpose, watch } from 'vue'
 import { VgriForm } from '@/base-ui/form/index'
 
-const formData = ref({})
+const formData = ref<any>({})
 
 interface Props {
   title?: string
   modalConfig: any
+  defaultInfo?: any
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   title: '新建用户',
-  modalConfig: () => ({})
+  modalConfig: () => ({}),
+  defaultInfo: () => ({})
 })
 
-const dialogVisible = ref(true)
+const dialogVisible = ref(false)
+
+watch(
+  () => props.defaultInfo,
+  (newValue) => {
+    for (const item of props.modalConfig.formItems) {
+      formData.value[`${item.filed}`] = newValue[`${item.filed}`]
+    }
+  }
+)
+
+defineExpose({
+  dialogVisible
+})
 </script>
 
 <style scoped lang="less"></style>
