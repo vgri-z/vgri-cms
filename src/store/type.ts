@@ -4,6 +4,8 @@ import { ISystemType } from './main/system/types'
 export interface IRootType {
   name: string
   password: string
+  entireDepartment: any[]
+  entireRole: any[]
 }
 
 export interface IRootWithModule {

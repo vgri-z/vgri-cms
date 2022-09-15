@@ -27,6 +27,7 @@
               <template v-else-if="item.type === 'select'">
                 <el-select
                   v-bind="item.otherOptions"
+                  :placeholder="item.placeholder"
                   style="width: 100%"
                   :model-value="modelValue[`${item.field}`]"
                   @update:modelValue="handleModelValueChange($event, item.field)"
