@@ -21,6 +21,7 @@
     <page-modal
       :modal-config="modalConfigRef"
       :default-info="defaultInfo"
+      :page-name="'users'"
       ref="pageModalRef"
     ></page-modal>
   </div>

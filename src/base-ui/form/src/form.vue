@@ -3,7 +3,7 @@
     <div class="header">
       <slot name="header"></slot>
     </div>
-    <el-form label-width="120px">
+    <el-form :label-width="labelWidth" ref="formRef" :model="modelValue">
       <el-row>
         <template v-for="item in formItems" :key="item.lable">
           <el-col v-bind="colLayout">
@@ -12,6 +12,7 @@
               :label="item.label"
               :label-width="labelWidth"
               :style="formItemStyle"
+              :rules="item.rules"
             >
               <!-- input/password -->
               <template v-if="item.type === 'input' || item.type === 'password'">
@@ -60,8 +61,11 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, defineEmits } from 'vue'
+import type { FormInstance } from 'element-plus'
+import { ref, withDefaults, defineProps, defineEmits, defineExpose } from 'vue'
 import { IFormItem } from '../types/type'
+
+const formRef = ref<FormInstance>()
 
 // props类型声明的方式暂时不支持导入的类型，但是后期可能会支持
 interface Props {
@@ -91,6 +95,19 @@ const emits = defineEmits(['update:modelValue'])
 const handleModelValueChange = (value: any, field: string) => {
   emits('update:modelValue', { ...props.modelValue, [field]: value })
 }
+
+// 表单检验
+const vgriFormValidate = () => {
+  return new Promise((resolve) => {
+    formRef.value?.validate((valid) => {
+      resolve(valid)
+    })
+  })
+}
+
+defineExpose({
+  vgriFormValidate
+})
 
 // 对传递过来的数据进行了一层浅拷贝
 // const formData = ref({ ...props.modelValue })

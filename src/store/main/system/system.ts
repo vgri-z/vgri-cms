@@ -1,8 +1,14 @@
 import { Module } from 'vuex'
 import { IRootType } from '../../type'
 import { ISystemType } from './types'
-import { deletePageData, getPageList } from '@/service/main/system/system'
+import {
+  createPageData,
+  deletePageData,
+  editPageData,
+  getPageList
+} from '@/service/main/system/system'
 import { ElMessage } from 'element-plus'
+import { useUpdatePageData } from '@/hooks/index'
 
 // const pageUrls: { [name: string]: string } = {
 //   users: '/users/list',
@@ -109,29 +115,26 @@ const systemModule: Module<ISystemType, IRootType> = {
     },
 
     // 删除列表数据
-    async deletePageDataAction({ dispatch, state }, payload) {
+    async deletePageDataAction(context, payload) {
       const { pageName, id } = payload
       const url = `/${pageName}/${id}`
 
       const res = await deletePageData(url)
-      if (res.code === 0) {
-        ElMessage({
-          message: res.data,
-          type: 'success'
-        })
-        // 获取所有的请求参数
-        const queryInfo = {
-          offset: (state.pageInfo.currentPage - 1) * state.pageInfo.pageSize,
-          size: state.pageInfo.pageSize,
-          ...state.pageQuery
-        }
-        console.log(queryInfo)
-        // 重新请求列表数据
-        dispatch('getPageListAction', {
-          pageName,
-          queryInfo
-        })
-      }
+      useUpdatePageData(res, pageName, context)
+    },
+    // 新建列表数据
+    async createPageDataAction(context, payload) {
+      const { pageName, newData } = payload
+      const url = `/${pageName}`
+      const res = await createPageData(url, newData)
+      useUpdatePageData(res, pageName, context)
+    },
+    // 编辑列表数据
+    async editPageDataAction(context, payload) {
+      const { pageName, id, editData } = payload
+      const url = `/${pageName}/${id}`
+      const res = await editPageData(url, editData)
+      useUpdatePageData(res, pageName, context)
     }
   }
 }
