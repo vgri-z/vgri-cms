@@ -8,6 +8,7 @@ module.exports = defineConfig({
   publicPath: '/',
   outputDir: 'build',
   devServer: {
+    port: '3200',
     proxy: {
       '^/api': {
         target: 'http://152.136.185.210:5000',

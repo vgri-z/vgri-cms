@@ -49,24 +49,28 @@ const store = useStore()
 
 const handleConfirmClick = async () => {
   // 表单校验
-  // const valid = await vgriFormRef.value?.vgriFormValidate()
-  // console.log(valid, 'page-modal')
+  const valid = await vgriFormRef.value?.vgriFormValidate()
+  console.log(valid, 'page-modal')
 
-  if (Object.keys(props.defaultInfo).length) {
-    // 编辑
-    store.dispatch('system/editPageDataAction', {
-      pageName: props.pageName,
-      id: props.defaultInfo.id,
-      editData: { ...formData.value }
-    })
-  } else {
-    // 新建
-    store.dispatch('system/createPageDataAction', {
-      pageName: props.pageName,
-      newData: { ...formData.value }
-    })
+  if (valid) {
+    // 验证通过
+    if (Object.keys(props.defaultInfo).length) {
+      // 编辑
+      store.dispatch('system/editPageDataAction', {
+        pageName: props.pageName,
+        id: props.defaultInfo.id,
+        editData: { ...formData.value }
+      })
+    } else {
+      // 新建
+      store.dispatch('system/createPageDataAction', {
+        pageName: props.pageName,
+        newData: { ...formData.value }
+      })
+    }
+
+    dialogVisible.value = false
   }
-  dialogVisible.value = false
 }
 
 defineExpose({

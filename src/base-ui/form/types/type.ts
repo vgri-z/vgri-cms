@@ -1,3 +1,5 @@
+import { FormItemRule } from 'element-plus'
+
 // 表单项的类型，根据类型动态渲染表单项
 export type IFormType = 'input' | 'password' | 'select' | 'datePicker'
 
@@ -10,7 +12,7 @@ export interface IFormItem {
   field: string // 表单绑定的字段名称
   type: string
   label: string
-  rules?: any[]
+  rules?: FormItemRule[]
   placeholder?: any
   // 针对select
   options?: IOption[]

@@ -13,6 +13,7 @@
               :label-width="labelWidth"
               :style="formItemStyle"
               :rules="item.rules"
+              :prop="item.field"
             >
               <!-- input/password -->
               <template v-if="item.type === 'input' || item.type === 'password'">
@@ -89,6 +90,8 @@ const props = withDefaults(defineProps<Props>(), {
   },
   modelValue: {}
 })
+
+console.log(props.modelValue)
 
 const emits = defineEmits(['update:modelValue'])
 

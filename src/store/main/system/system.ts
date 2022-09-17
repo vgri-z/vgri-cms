@@ -7,7 +7,6 @@ import {
   editPageData,
   getPageList
 } from '@/service/main/system/system'
-import { ElMessage } from 'element-plus'
 import { useUpdatePageData } from '@/hooks/index'
 
 // const pageUrls: { [name: string]: string } = {
