@@ -50,7 +50,7 @@ const store = useStore()
 const handleConfirmClick = async () => {
   // 表单校验
   const valid = await vgriFormRef.value?.vgriFormValidate()
-  console.log(valid, 'page-modal')
+  // console.log(valid, 'page-modal')
 
   if (valid) {
     // 验证通过

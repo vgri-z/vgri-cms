@@ -45,12 +45,14 @@ const loginModule: Module<ILoginType, IRootType> = {
   },
   getters: {},
   actions: {
-    async loginAccountAction({ commit }, payload: IAccount) {
+    async loginAccountAction({ commit, dispatch }, payload: IAccount) {
       // 1. 登录
       const loginRes = await accountLoginRequest(payload)
       const { id, token } = loginRes.data
       commit('changeToken', token)
       localCache.setCache('token', token)
+      // 初始化部门角色数据
+      dispatch('getInitialDataAction', null, { root: true })
 
       // 2. 获取用户信息
       const userInfoRes = await requestUserInfoById(id)
@@ -67,10 +69,11 @@ const loginModule: Module<ILoginType, IRootType> = {
       // 跳转到首页
       router.push('/main')
     },
-    loadLocalLogin({ commit }) {
+    loadLocalLogin({ commit, dispatch }) {
       const token = localCache.getCache('token')
       if (token) {
         commit('changeToken', token)
+        dispatch('getInitialDataAction', null, { root: true })
       }
       const userInfo = localCache.getCache('userInfo')
       if (userInfo) {

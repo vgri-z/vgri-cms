@@ -55,7 +55,7 @@ const store = createStore<IRootType>({
 
 export function setupStore() {
   store.dispatch('login/loadLocalLogin')
-  store.dispatch('getInitialDataAction')
+  // store.dispatch('getInitialDataAction')
 }
 
 // 解决在组件中使用useStore返回的是Store<any>类型，而不是具体类型的问题

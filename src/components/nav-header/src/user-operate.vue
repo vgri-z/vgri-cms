@@ -30,8 +30,8 @@ const router = useRouter()
 const userName = store.state.login.userInfo.name
 
 const logout = () => {
-  localCache.clearCache()
-  router.push('/login')
+  localCache.deleteCache('token')
+  router.push('/main')
 }
 </script>
 

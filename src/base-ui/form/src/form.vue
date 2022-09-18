@@ -91,8 +91,6 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: {}
 })
 
-console.log(props.modelValue)
-
 const emits = defineEmits(['update:modelValue'])
 
 const handleModelValueChange = (value: any, field: string) => {
