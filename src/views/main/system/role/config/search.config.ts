@@ -8,7 +8,7 @@ export const searchFormConfig: IForm = {
     { field: 'name', type: 'input', label: '角色名', placeholder: '请输入用户名' },
     { field: 'intro', type: 'input', label: '权限介绍', placeholder: '请输入权限介绍' },
     {
-      field: 'createTime',
+      field: 'createAt',
       type: 'datePicker',
       label: '创建时间',
       otherOptions: {

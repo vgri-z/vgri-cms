@@ -2,6 +2,7 @@
   <div class="page-modal">
     <el-dialog v-model="dialogVisible" :title="title" width="30%" center destroy-on-close>
       <vgri-form ref="vgriFormRef" v-bind="modalConfig" v-model="formData"></vgri-form>
+      <slot></slot>
       <template #footer>
         <span class="dialog-footer">
           <el-button type="primary" @click="handleConfirmClick">确认</el-button>
@@ -24,6 +25,7 @@ interface Props {
   modalConfig: any
   defaultInfo?: any
   pageName: string
+  otherInfo?: any
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -59,13 +61,13 @@ const handleConfirmClick = async () => {
       store.dispatch('system/editPageDataAction', {
         pageName: props.pageName,
         id: props.defaultInfo.id,
-        editData: { ...formData.value }
+        editData: { ...formData.value, ...props.otherInfo }
       })
     } else {
       // 新建
       store.dispatch('system/createPageDataAction', {
         pageName: props.pageName,
-        newData: { ...formData.value }
+        newData: { ...formData.value, ...props.otherInfo }
       })
     }
 

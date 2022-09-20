@@ -5,6 +5,7 @@ import login from './login/login'
 import system from './main/system/system'
 import type { IRootType, IStoreType } from './type'
 import { getPageList } from '@/service/main/system/system'
+import menu from '@/router/main/system/menu/menu'
 
 // vuex createStore接收一个泛型S，这个S就是state的类型或者state返回值的类型
 const store = createStore<IRootType>({
@@ -14,7 +15,8 @@ const store = createStore<IRootType>({
       password: '1292839',
       height: '',
       entireDepartment: [],
-      entireRole: []
+      entireRole: [],
+      entireMenu: []
     }
   },
   mutations: {
@@ -26,6 +28,9 @@ const store = createStore<IRootType>({
     },
     changeEntireRole(state, roleList) {
       state.entireRole = roleList
+    },
+    changeEntireMenu(state, menuList) {
+      state.entireMenu = menuList
     }
   },
   getters: {},
@@ -45,6 +50,10 @@ const store = createStore<IRootType>({
       })
       const { list: roleList } = roleRes.data
       commit('changeEntireRole', roleList)
+      // 初始化菜单数据
+      const menuRes = await getPageList('/menu/list', {})
+      const { list: menuList } = menuRes.data
+      commit('changeEntireMenu', menuList)
     }
   },
   modules: {
