@@ -181,6 +181,7 @@ const handleModelValueChange = (value: any, field: string) => {
 7. 02:04:39 - 表单优化：formdata中属性应该动态控制 表单重置功能
 
 ### lesson10
+
 1. 05:00 - 31:00 表单重置后不生效的两种解决办法
 2. 31:00 - 53:00 搜索/重置功能 use-page-search的hooks封装
 3. 53:00 - 01:12:00 分页功能
@@ -188,6 +189,7 @@ const handleModelValueChange = (value: any, field: string) => {
 5. 01:46:46 - 02:22:00 菜单页面树形表的封装扩展 按钮权限管理
 
 ### lesson11 
+
 1. 00:00 - 22:22 列表删除操作
 2. 22:22 - 48:36 page-model组件的封装抽离
 3. 48:36 - 01:13:05 page-modal组件的显示，数据回显，use-page-modal抽取封装
@@ -203,3 +205,16 @@ const handleModelValueChange = (value: any, field: string) => {
 3. 01:04:00 - 01:25:00 编辑角色时菜单树的回显
 4. 01:25:00 - 01:54:00 Echart的基本介绍、引入以及基本使用步骤
 5. 01:54:00 - 02:08:00 canvas渲染 vs svg渲染
+6. 02:08:00 - 02:36:00 Echarts的options配置项介绍
+
+# lesson13
+
+1. 00:00 - 11:00 -用户登录问题说明 新增接口说明
+2. 11:00 - 30:00 图表数据的请求
+3. 30:00 - 39:00 dashboard页面布局
+4. 39:00 - 50:00 项目的vue版本升级问题
+5. 50:00 - 01:07:00 BaseEchart基本封装
+6. 01:07:00 - 01:23:00 useEchartse初步封装
+7. 01:23:00 - 01:44:00 echarts封装分结构 pie-Echarts封装
+8. 01:44:00 - 02:07:00 echarts其他图形的封装
+9. 02:07:00 - 02:40:00 map-echarts封装
