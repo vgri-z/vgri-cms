@@ -3,9 +3,9 @@ import { createStore, useStore as useVuexStore } from 'vuex'
 import type { Store } from 'vuex'
 import login from './login/login'
 import system from './main/system/system'
+import dashboard from './main/analysis/dashboard'
 import type { IRootType, IStoreType } from './type'
 import { getPageList } from '@/service/main/system/system'
-import menu from '@/router/main/system/menu/menu'
 
 // vuex createStore接收一个泛型S，这个S就是state的类型或者state返回值的类型
 const store = createStore<IRootType>({
@@ -58,7 +58,8 @@ const store = createStore<IRootType>({
   },
   modules: {
     login,
-    system
+    system,
+    dashboard
   }
 })
 

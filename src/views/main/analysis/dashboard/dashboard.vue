@@ -24,6 +24,10 @@
 
 <script setup lang="ts">
 import { VgriCard } from '@/base-ui/card'
+import { useStore } from '@/store'
+
+const store = useStore()
+store.dispatch('dashboard/getDashboardDataAction')
 </script>
 
 <style scoped lang="less">
