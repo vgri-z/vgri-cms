@@ -7,7 +7,7 @@ import { localCache } from '@/utils/cache'
 const vgriRequest = new VgriRequest({
   baseURL: BASE_URL,
   timeout: TIME_OUT,
-  // showLoading: true,
+  // showLoading: false,
   interceptors: {
     requestInterceptor: (config: AxiosRequestConfig) => {
       // console.log('请求拦截成功')

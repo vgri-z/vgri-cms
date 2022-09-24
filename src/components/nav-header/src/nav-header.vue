@@ -17,6 +17,7 @@ import { useStore } from '@/store'
 import { IBreadItem } from '../../../base-ui/breadcrumb/types/type'
 import { pathToBreadcrumb } from '@/utils/mapMenus'
 import { IMenuType } from '@/service/login/type'
+import { vgriEmitter } from '@/utils/event'
 
 const emits = defineEmits(['foldMenu'])
 const isFold = ref(false)
@@ -33,6 +34,7 @@ const breadcrumbs = computed<IBreadItem[]>(() => {
 const handleFold = () => {
   isFold.value = !isFold.value
   emits('foldMenu', isFold.value)
+  vgriEmitter.emit('echartResize')
 }
 </script>
 

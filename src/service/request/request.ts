@@ -104,10 +104,10 @@ export class VgriRequest {
           }
           // console.log(res)
           resolve(res)
-          this.showLoading = DEFAULT_LOADING
+          this.showLoading = this.showLoading ?? DEFAULT_LOADING
         })
         .catch((err) => {
-          this.showLoading = DEFAULT_LOADING
+          this.showLoading = this.showLoading ?? DEFAULT_LOADING
           reject(err)
         })
     })
