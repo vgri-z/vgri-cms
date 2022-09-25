@@ -1,5 +1,5 @@
 <template>
-  <div class="pie-echart">
+  <div class="rose-echart">
     <base-echart :option="option"></base-echart>
   </div>
 </template>
@@ -12,34 +12,39 @@ import { EChartsOption } from 'echarts'
 
 interface Props {
   pieData: IDataType[]
+  title?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  pieData: () => []
+  pieData: () => [],
+  title: ''
 })
 
 const option: ComputedRef<EChartsOption> = computed(() => {
   return {
-    tooltip: {
-      trigger: 'item'
-    },
     legend: {
-      orient: 'horizontal',
-      left: 'center'
+      top: 'bottom'
+    },
+    toolbox: {
+      show: true,
+      feature: {
+        mark: { show: true },
+        dataView: { show: true, readOnly: false },
+        restore: { show: true },
+        saveAsImage: { show: true }
+      }
     },
     series: [
       {
-        name: 'Access From',
+        name: 'Nightingale Chart',
         type: 'pie',
-        radius: '50%',
-        data: props.pieData,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
+        radius: [10, 120],
+        center: ['50%', '50%'],
+        roseType: 'area',
+        itemStyle: {
+          borderRadius: 8
+        },
+        data: props.pieData
       }
     ]
   }

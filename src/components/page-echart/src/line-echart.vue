@@ -1,5 +1,5 @@
 <template>
-  <div class="pie-echart">
+  <div class="line-echart">
     <base-echart :option="option"></base-echart>
   </div>
 </template>
@@ -7,39 +7,35 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, computed, ComputedRef } from 'vue'
 import { BaseEchart } from '@/base-ui/echart'
-import { IDataType } from '../type'
 import { EChartsOption } from 'echarts'
 
 interface Props {
-  pieData: IDataType[]
+  xLabeles: string[]
+  title?: string
+  values: any[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  pieData: () => []
+  xLabeles: () => [],
+  values: () => [],
+  title: ''
 })
 
 const option: ComputedRef<EChartsOption> = computed(() => {
   return {
-    tooltip: {
-      trigger: 'item'
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: props.xLabeles
     },
-    legend: {
-      orient: 'horizontal',
-      left: 'center'
+    yAxis: {
+      type: 'value'
     },
     series: [
       {
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
-        data: props.pieData,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
+        data: props.values,
+        type: 'line',
+        areaStyle: {}
       }
     ]
   }
