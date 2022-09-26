@@ -1,5 +1,8 @@
 import * as echarts from 'echarts'
 import type { EChartsOption } from 'echarts'
+import chinaMapData from '../data/china.json'
+
+echarts.registerMap('china', chinaMapData)
 
 export function useEcharts(el: HTMLElement) {
   const echartInstance = echarts.init(el)
